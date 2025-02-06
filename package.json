@@ -7,6 +7,8 @@
     "web": "pnpm --filter web dev",
     "backend": "pnpm --filter backend dev",
     "build": "pnpm -r build",
+    "build:core": "pnpm --filter @genz-deezer/core build",
+    "build:infrastructure": "pnpm --filter @genz-deezer/infrastructure build",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "pnpm -r test",
@@ -24,9 +26,9 @@
     "eslint-plugin-react-refresh": "0.4.16",
     "eslint-plugin-tailwindcss": "3.17.5",
     "globals": "15.14.0",
-    "typescript": "5.6.2",
-    "typescript-eslint": "8.18.2",
     "prettier": "3.2.0",
-    "prettier-plugin-tailwindcss": "0.5.12"
+    "prettier-plugin-tailwindcss": "0.5.12",
+    "typescript": "5.6.2",
+    "typescript-eslint": "8.18.2"
   }
 }
