@@ -1,4 +1,3 @@
-// src/lib/apollo-client.ts
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { ApolloAuthRepository } from "@genz-deezer/infrastructure"
