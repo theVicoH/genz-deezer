@@ -2,13 +2,14 @@
   "name": "@genz-deezer/infrastructure",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "dependencies": {
-    "@genz-deezer/core": "workspace:*"
+    "@genz-deezer/core": "workspace:^1.0.0",
+    "@apollo/client": "3.12.9"
   },
   "keywords": [],
   "author": "",
