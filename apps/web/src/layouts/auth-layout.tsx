@@ -2,7 +2,6 @@ import { Outlet, Navigate } from "react-router-dom"
 
 import { useAuthStore } from "@/stores/auth-store"
 
-
 const AuthLayout = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated())
 

@@ -11,15 +11,17 @@ interface AuthState {
   isAuthenticated: () => boolean
 }
 
-export const useAuthStore = create<AuthState>()(persist(
-  (set, get) => ({
-    token: null,
-    user: null,
-    setAuth: (token, user) => set({ token, user }),
-    clearAuth: () => set({ token: null, user: null }),
-    isAuthenticated: () => !!get().token
-  }),
-  {
-    name: "auth-storage"
-  }
-))
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set, get) => ({
+      token: null,
+      user: null,
+      setAuth: (token, user) => set({ token, user }),
+      clearAuth: () => set({ token: null, user: null }),
+      isAuthenticated: () => !!get().token
+    }),
+    {
+      name: "auth-storage"
+    }
+  )
+)

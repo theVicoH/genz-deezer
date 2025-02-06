@@ -1,19 +1,26 @@
-import jwt from 'jsonwebtoken';
-import type { Context } from './types';
-import { config } from './config/env';
+import jwt from "jsonwebtoken"
 
-export const getContext = async ({ req }: { req: { headers: { authorization?: string } } }): Promise<Context> => {
-  const auth = req.headers.authorization || '';
-  
+import { config } from "./config/env"
+
+import type { Context } from "./types"
+
+export const getContext = async ({
+  req
+}: {
+  req: { headers: { authorization?: string } }
+}): Promise<Context> => {
+  const auth = req.headers.authorization || ""
+
   if (!auth) {
-    return { userId: null };
+    return { userId: null }
   }
 
   try {
-    const token = auth.split('Bearer ')[1];
-    const decoded = jwt.verify(token, config.JWT_SECRET) as { userId: string };
-    return { userId: decoded.userId };
-  } catch (error) {
-    return { userId: null };
+    const token = auth.split("Bearer ")[1]
+    const decoded = jwt.verify(token, config.JWT_SECRET) as { userId: string }
+
+    return { userId: decoded.userId }
+  } catch {
+    return { userId: null }
   }
-};
+}

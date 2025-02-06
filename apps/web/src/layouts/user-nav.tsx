@@ -15,16 +15,13 @@ import { useAuthStore } from "@/stores/auth-store"
 const UserNav = () => {
   const navigate = useNavigate()
   const { user, clearAuth } = useAuthStore()
-  
+
   const handleLogout = () => {
     clearAuth()
     navigate("/login")
   }
 
-  const initials = user?.email
-    .split("@")[0]
-    .slice(0, 2)
-    .toUpperCase() ?? "??"
+  const initials = user?.email.split("@")[0].slice(0, 2).toUpperCase() ?? "??"
 
   return (
     <DropdownMenu>
@@ -42,16 +39,10 @@ const UserNav = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate("/dashboard")}>
-          Tableau de bord
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => navigate("/profile")}>
-          Profil
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate("/dashboard")}>Tableau de bord</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate("/profile")}>Profil</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogout}>
-          Se déconnecter
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Se déconnecter</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -51,9 +51,7 @@ const Profile = () => {
               <Label htmlFor="email">Email</Label>
               <Input id="email" placeholder="Enter your new email" {...form.register("email")} />
               {form.formState.errors.email && (
-                <p className="text-sm text-red-500">
-                  {form.formState.errors.email.message}
-                </p>
+                <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>
               )}
             </div>
             <Button type="submit">Enregistrer</Button>

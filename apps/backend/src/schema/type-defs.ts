@@ -22,4 +22,4 @@ export const typeDefs = `#graphql
     updateProfile(email: String!): User!
     deleteAccount: Boolean!
   }
-`;
+`

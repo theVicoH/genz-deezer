@@ -1,7 +1,7 @@
-import { queryResolvers } from './query';
-import { mutationResolvers } from './mutation';
+import { mutationResolvers } from "./mutation"
+import { queryResolvers } from "./query"
 
 export const resolvers = {
   Query: queryResolvers,
-  Mutation: mutationResolvers,
-};
+  Mutation: mutationResolvers
+}

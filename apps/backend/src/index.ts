@@ -1,18 +1,20 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import { typeDefs } from './schema/typeDefs';
-import { resolvers } from './resolvers';
-import { getContext } from './context';
-import { config } from './config/env';
+import { ApolloServer } from "@apollo/server"
+import { startStandaloneServer } from "@apollo/server/standalone"
+
+import { config } from "./config/env"
+import { getContext } from "./context"
+import { resolvers } from "./resolvers"
+import { typeDefs } from "./schema/type-defs"
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
-});
+  resolvers
+})
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: Number(config.SERVER_PORT) },
   context: getContext
-});
+})
 
-console.log(`🚀 Server ready at: ${url}`);
+/* eslint-disable no-console */
+console.log(`🚀 Server ready at: ${url}`)

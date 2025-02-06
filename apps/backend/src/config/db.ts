@@ -1,5 +1,6 @@
-import postgres from 'postgres';
-import { config } from './env';
+import postgres from "postgres"
+
+import { config } from "./env"
 
 export const sql = postgres({
   host: "localhost",
@@ -12,10 +13,4 @@ export const sql = postgres({
   max: 10,
   idle_timeout: 20,
   connect_timeout: 10
-});
-
-sql`SELECT 1`.then(() => {
-  console.log('Database connected successfully');
-}).catch(err => {
-  console.error('Database connection error:', err);
-});
+})

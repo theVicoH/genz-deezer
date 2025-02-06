@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "paths": {
-      "@genz-deezer/*": ["packages/*/src"]
-    },
-    "types": ["node"],
     "skipLibCheck": true,
-    "strict": true,
-    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "."
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@genz-deezer/*": ["packages/*/src"]
+    }
   },
-  "exclude": ["**/node_modules", "**/dist"]
+  "include": ["packages/*/src/**/*", "apps/*/src/**/*"],
+  "exclude": ["node_modules"]
 }

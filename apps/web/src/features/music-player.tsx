@@ -6,7 +6,6 @@ import { Button } from "@/components/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/card"
 import { Slider } from "@/components/slider"
 
-
 const mockTracks = [
   {
     id: 1,
@@ -68,14 +67,10 @@ const MusicPlayer = () => {
     <div className="space-y-8">
       <Card className="mx-auto w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">
-            {currentTrack?.title}
-          </CardTitle>
-          <p className="text-center text-gray-500">
-            {currentTrack?.artist?.name}
-          </p>
+          <CardTitle className="text-center">{currentTrack?.title}</CardTitle>
+          <p className="text-center text-gray-500">{currentTrack?.artist?.name}</p>
         </CardHeader>
-        
+
         <CardContent>
           <div className="relative mb-4 aspect-square">
             <img
@@ -84,7 +79,7 @@ const MusicPlayer = () => {
               className="h-full w-full rounded-lg object-cover"
             />
           </div>
-          
+
           <div className="space-y-2">
             <Slider
               value={progress}
@@ -94,38 +89,22 @@ const MusicPlayer = () => {
               className="my-4"
             />
             <div className="flex justify-between text-sm">
-              <span>{Math.floor(progress[0] / 100 * 3.5)}:00</span>
+              <span>{Math.floor((progress[0] / 100) * 3.5)}:00</span>
               <span>3:30</span>
             </div>
           </div>
         </CardContent>
 
         <CardFooter className="flex justify-center gap-4">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handlePrevious}
-          >
+          <Button variant="outline" size="icon" onClick={handlePrevious}>
             <SkipBack className="h-4 w-4" />
           </Button>
-          
-          <Button
-            variant="default"
-            size="icon"
-            onClick={togglePlay}
-          >
-            {isPlaying ? (
-              <Pause className="h-4 w-4" />
-            ) : (
-              <Play className="h-4 w-4" />
-            )}
+
+          <Button variant="default" size="icon" onClick={togglePlay}>
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </Button>
-          
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleNext}
-          >
+
+          <Button variant="outline" size="icon" onClick={handleNext}>
             <SkipForward className="h-4 w-4" />
           </Button>
         </CardFooter>
