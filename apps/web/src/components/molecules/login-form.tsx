@@ -1,6 +1,3 @@
-import { useState } from "react"
-
-import { useMutation } from "@apollo/client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -11,11 +8,7 @@ import { Button } from "../atoms/button"
 import { Input } from "../atoms/input"
 import { Label } from "../atoms/label"
 
-import type { LoginMutationResponse } from "@/types/graphql"
-
-
-import { LOGIN } from "@/gql/graphql"
-import { useAuthStore } from "@/stores/auth-store"
+import { useAuth } from "@/hooks/use-auth"
 
 const loginSchema = z.object({
   email: z.string().email("Email invalide"),
@@ -25,20 +18,9 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>
 
 const LoginForm = () => {
-  const [error, setError] = useState<string>("")
+  const { login, isLoading, error } = useAuth()
   const navigate = useNavigate()
-  const setAuth = useAuthStore((state) => state.setAuth)
-
-  const [login, { loading }] = useMutation<LoginMutationResponse>(LOGIN, {
-    onCompleted: (data) => {
-      setAuth(data.login.token, data.login.user)
-      navigate("/dashboard")
-    },
-    onError: (error) => {
-      setError(error.message)
-    }
-  })
-
+  
   const {
     register,
     handleSubmit,
@@ -48,8 +30,7 @@ const LoginForm = () => {
   })
 
   const onSubmit = (values: LoginFormValues) => {
-    setError("")
-    login({ variables: values })
+    login(values)
   }
 
   return (
@@ -72,11 +53,11 @@ const LoginForm = () => {
         </div>
         {error && (
           <Alert variant="destructive">
-            <AlertDescription>{error}</AlertDescription>
+            <AlertDescription>{error.message}</AlertDescription>
           </Alert>
         )}
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "Connexion..." : "Se connecter"}
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Connexion..." : "Se connecter"}
         </Button>
       </form>
       <div className="text-center">

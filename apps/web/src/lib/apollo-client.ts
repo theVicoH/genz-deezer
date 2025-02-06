@@ -1,8 +1,10 @@
+// src/lib/apollo-client.ts
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
+import { ApolloAuthRepository } from "@genz-deezer/infrastructure"
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000"
+  uri: import.meta.env.VITE_API_URI
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -20,3 +22,5 @@ export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
+
+export const authRepository = new ApolloAuthRepository(client)

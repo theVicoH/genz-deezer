@@ -9,14 +9,6 @@ export interface AuthPayload {
   user: User
 }
 
-export interface LoginMutationResponse {
-  login: AuthPayload
-}
-
-export interface RegisterMutationResponse {
-  register: AuthPayload
-}
-
 export interface MeQueryResponse {
   me: User
 }

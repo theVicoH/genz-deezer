@@ -1,6 +1,3 @@
-import { useState } from "react"
-
-import { useMutation } from "@apollo/client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -12,10 +9,7 @@ import { Button } from "../atoms/button"
 import { Input } from "../atoms/input"
 import { Label } from "../atoms/label"
 
-import type { RegisterMutationResponse } from "@/types/graphql"
-
-import { REGISTER } from "@/gql/graphql"
-import { useToast } from "@/hooks/use-toast"
+import { useAuth } from "@/hooks/use-auth"
 
 const registerSchema = z
   .object({
@@ -31,23 +25,9 @@ const registerSchema = z
 type RegisterFormValues = z.infer<typeof registerSchema>
 
 const RegisterForm = () => {
-  const [error, setError] = useState<string>("")
+  const { register, isLoading, error } = useAuth()
   const navigate = useNavigate()
-  const { toast } = useToast()
-
-  const [register, { loading }] = useMutation<RegisterMutationResponse>(REGISTER, {
-    onCompleted: () => {
-      toast({
-        title: "Inscription réussie !",
-        description: "Vous pouvez maintenant vous connecter avec vos identifiants."
-      })
-      navigate("/login")
-    },
-    onError: (error) => {
-      setError(error.message)
-    }
-  })
-
+  
   const {
     register: registerField,
     handleSubmit,
@@ -56,14 +36,8 @@ const RegisterForm = () => {
     resolver: zodResolver(registerSchema)
   })
 
-  const onSubmit = ({ email, password }: RegisterFormValues) => {
-    setError("")
-    register({
-      variables: {
-        email,
-        password
-      }
-    })
+  const onSubmit = (values: RegisterFormValues) => {
+    register(values)
   }
 
   return (
@@ -98,11 +72,11 @@ const RegisterForm = () => {
         </div>
         {error && (
           <Alert variant="destructive">
-            <AlertDescription>{error}</AlertDescription>
+            <AlertDescription>{error.message}</AlertDescription>
           </Alert>
         )}
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "Inscription..." : "S'inscrire"}
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Inscription..." : "S'inscrire"}
         </Button>
       </form>
       <div className="text-center">
