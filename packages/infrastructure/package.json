@@ -8,8 +8,9 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@apollo/client": "3.12.9",
     "@genz-deezer/core": "workspace:^1.0.0",
-    "@apollo/client": "3.12.9"
+    "dotenv": "16.4.7"
   },
   "keywords": [],
   "author": "",
