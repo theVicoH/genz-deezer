@@ -3,6 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs } from './schema/typeDefs';
 import { resolvers } from './resolvers';
 import { getContext } from './context';
+import { config } from './config/env';
 
 const server = new ApolloServer({
   typeDefs,
@@ -10,7 +11,7 @@ const server = new ApolloServer({
 });
 
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: Number(config.SERVER_PORT) },
   context: getContext
 });
 
