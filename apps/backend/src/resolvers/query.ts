@@ -1,8 +1,9 @@
-import { sql } from "../config/db"
-import { checkAuth } from "../utils/auth"
-import { dbUserToUser } from "../utils/user"
+import type { Context, DBUser, QueryUserArgs } from "@/types"
 
-import type { Context, DBUser, QueryUserArgs } from "../types"
+import { sql } from "@/config/db"
+import { checkAuth } from "@/utils/auth"
+import { dbUserToUser } from "@/utils/user"
+
 
 export const queryResolvers = {
   me: async (_: never, __: never, context: Context) => {

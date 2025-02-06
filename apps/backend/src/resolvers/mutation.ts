@@ -1,9 +1,5 @@
 import bcryptjs from "bcryptjs"
 
-import { sql } from "../config/db"
-import { generateToken, checkAuth } from "../utils/auth"
-import { dbUserToUser } from "../utils/user"
-
 import type {
   Context,
   MutationRegisterArgs,
@@ -11,7 +7,11 @@ import type {
   MutationUpdateProfileArgs,
   AuthPayload,
   DBUser
-} from "../types"
+} from "@/types"
+
+import { sql } from "@/config/db"
+import { generateToken, checkAuth } from "@/utils/auth"
+import { dbUserToUser } from "@/utils/user"
 
 export const mutationResolvers = {
   register: async (_: never, { email, password }: MutationRegisterArgs): Promise<AuthPayload> => {
