@@ -1,8 +1,7 @@
+import { GET_ME, LOGIN, REGISTER, UPDATE_PROFILE } from "../api/graphql/auth.queries"
+
 import type { ApolloClient, NormalizedCacheObject } from "@apollo/client"
 import type { AuthRepository, AuthCredentials, AuthResult, User } from "@genz-deezer/core"
-
-import { GET_ME, LOGIN, REGISTER, UPDATE_PROFILE } from "@/api/graphql/auth.queries"
-
 
 export class ApolloAuthRepository implements AuthRepository {
   constructor(private readonly client: ApolloClient<NormalizedCacheObject>) {}
