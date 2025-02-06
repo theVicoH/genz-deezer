@@ -17,6 +17,8 @@ declare module "bun" {
     DB_NAME: string
     DB_USER: string
     DB_PASSWORD: string
+    SERVER_PORT: string
+    SERVER_URI: string
   }
 }
 
@@ -32,5 +34,6 @@ export const config = {
   DB_NAME: process.env["DB_NAME"],
   DB_USER: process.env["DB_USER"],
   DB_PASSWORD: process.env["DB_PASSWORD"],
-  SERVER_PORT: process.env["SERVER_PORT"]
+  SERVER_PORT: process.env["SERVER_PORT"],
+  SERVER_URI: process.env["SERVER_URI"]
 } as const
