@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
-import { Avatar, AvatarFallback } from "@/components/avatar"
-import { Button } from "@/components/button"
+import { Avatar, AvatarFallback } from "../atoms/avatar"
+import { Button } from "../atoms/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "@/components/dropdown-menu"
+} from "../atoms/dropdown-menu"
+
 import { useAuthStore } from "@/stores/auth-store"
 
 const UserNav = () => {

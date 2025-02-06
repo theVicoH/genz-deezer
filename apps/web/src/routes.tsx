@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 
-import LoginForm from "./features/login-form"
-import RegisterForm from "./features/register-form"
-import AuthLayout from "./layouts/auth-layout"
-import ProtectedLayout from "./layouts/protected-layout"
+import LoginForm from "./components/molecules/login-form"
+import RegisterForm from "./components/molecules/register-form"
+import AuthLayout from "./components/organisms/auth-layout"
+import ProtectedLayout from "./components/organisms/protected-layout"
 import Dashboard from "./pages/dashboard"
 import Profile from "./pages/profile"
 

@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/client"
 
 import type { MeQueryResponse } from "@/types/graphql"
 
-import MusicPlayer from "@/features/music-player"
+import MusicPlayer from "@/components/molecules/music-player"
+import UserNav from "@/components/organisms/user-nav"
 import { GET_ME } from "@/gql/graphql"
-import UserNav from "@/layouts/user-nav"
 
 const Dashboard = () => {
   const { loading } = useQuery<MeQueryResponse>(GET_ME)

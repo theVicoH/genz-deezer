@@ -5,12 +5,12 @@ import * as z from "zod"
 
 import type { MeQueryResponse } from "@/types/graphql"
 
-import { Button } from "@/components/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/card"
-import { Input } from "@/components/input"
-import { Label } from "@/components/label"
+import { Button } from "@/components/atoms/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/card"
+import { Input } from "@/components/atoms/input"
+import { Label } from "@/components/atoms/label"
+import UserNav from "@/components/organisms/user-nav"
 import { GET_ME } from "@/gql/graphql"
-import UserNav from "@/layouts/user-nav"
 
 const profileSchema = z.object({
   email: z.string().email("Email invalide")

@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import * as z from "zod"
 
+
+import { Alert, AlertDescription } from "../atoms/alert"
+import { Button } from "../atoms/button"
+import { Input } from "../atoms/input"
+import { Label } from "../atoms/label"
+
 import type { RegisterMutationResponse } from "@/types/graphql"
 
-import { Alert, AlertDescription } from "@/components/alert"
-import { Button } from "@/components/button"
-import { Input } from "@/components/input"
-import { Label } from "@/components/label"
 import { REGISTER } from "@/gql/graphql"
 import { useToast } from "@/hooks/use-toast"
 

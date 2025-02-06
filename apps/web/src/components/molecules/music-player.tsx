@@ -2,9 +2,9 @@ import { useState } from "react"
 
 import { SkipBack, SkipForward, Play, Pause } from "lucide-react"
 
-import { Button } from "@/components/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/card"
-import { Slider } from "@/components/slider"
+import { Button } from "../atoms/button"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../atoms/card"
+import { Slider } from "../atoms/slider"
 
 const mockTracks = [
   {
