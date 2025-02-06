@@ -18,7 +18,7 @@ declare module "bun" {
     DB_USER: string
     DB_PASSWORD: string
     SERVER_PORT: string
-    SERVER_URI: string
+    VITE_API_URI: string
   }
 }
 
@@ -35,5 +35,5 @@ export const config = {
   DB_USER: process.env["DB_USER"],
   DB_PASSWORD: process.env["DB_PASSWORD"],
   SERVER_PORT: process.env["SERVER_PORT"],
-  SERVER_URI: process.env["SERVER_URI"]
+  VITE_API_URI: process.env["VITE_API_URI"]
 } as const
