@@ -10,10 +10,33 @@ export const typeDefs = `#graphql
     user: User!
   }
 
+  type Track {
+    id: ID!
+    title: String!
+    duration: Int!
+    preview: String
+    artist: Artist!
+    album: Album!
+  }
+
+  type Artist {
+    id: ID!
+    name: String!
+    picture: String
+  }
+
+  type Album {
+    id: ID!
+    title: String!
+    cover: String
+  }
+
+
   type Query {
     me: User!
     users: [User!]!
     user(id: ID!): User
+    randomTracks: [Track!]!
   }
 
   type Mutation {

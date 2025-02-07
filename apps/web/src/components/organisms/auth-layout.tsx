@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom"
 
-import { authTokenStateUseCase } from "@/lib/auth"
+import { authTokenStateUseCase } from "@/lib/usecases"
 
 const AuthLayout = () => {
   const isAuthenticated = authTokenStateUseCase.isAuthenticated()

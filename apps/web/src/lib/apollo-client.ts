@@ -1,8 +1,8 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
-import { ApolloAuthRepository, ApolloUserRepository } from "@genz-deezer/infrastructure"
+import { ApolloAuthRepository, ApolloUserRepository, ApolloTracksRepository } from "@genz-deezer/infrastructure"
 
-import { authTokenStateUseCase } from "@/lib/auth"
+import { authTokenStateUseCase } from "@/lib/usecases"
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_API_URI
@@ -27,3 +27,5 @@ export const client = new ApolloClient({
 export const authRepository = new ApolloAuthRepository(client)
 
 export const userRepository = new ApolloUserRepository(client, () => authTokenStateUseCase.getToken())
+
+export const tracksRepository = new ApolloTracksRepository(client, () => authTokenStateUseCase.getToken())

@@ -6,8 +6,8 @@ export interface AuthRepository {
 }
 
 export interface AuthTokenStateRepository {
-  getToken(): string | null
-  setToken(token: string): void
-  clearToken(): void
-  isAuthenticated(): boolean
+  getToken(): string | null;
+  setToken(token: string): void;
+  clearToken(): void;
+  isAuthenticated(): boolean;
 }

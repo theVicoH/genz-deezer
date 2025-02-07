@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 
 import { useToast } from "@/hooks/use-toast"
-import { authTokenStateUseCase, authUseCase } from "@/lib/auth"
+import { authTokenStateUseCase, authUseCase } from "@/lib/usecases"
 
 export function useAuth() {
   const navigate = useNavigate()

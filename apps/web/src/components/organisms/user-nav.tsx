@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger
 } from "../atoms/dropdown-menu"
 
-import { authTokenStateUseCase } from "@/lib/auth"
+import { authTokenStateUseCase } from "@/lib/usecases"
 import { userUseCase } from "@/lib/usecases"
 
 const UserNav = () => {
