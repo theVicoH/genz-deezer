@@ -10,7 +10,7 @@ export class ApolloTracksRepository implements TracksRepository {
     private readonly getToken: () => string | null
   ) {}
 
-  async randomTracks(): Promise<Track[]> {
+  async randomTracks(): Promise<{ randomTracks: Track[] }> {
     const token = this.getToken()
 
     if (!token) {

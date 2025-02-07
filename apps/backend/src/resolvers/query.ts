@@ -1,5 +1,5 @@
 import type { Context, DBUser, QueryUserArgs } from "@/types"
-import type { DeezerResponse } from "@/types/deezer"
+import type { DeezerResponse, Track } from "@/types/deezer"
 
 import { sql } from "@/config/db"
 import { config } from "@/config/env"
@@ -38,10 +38,23 @@ export const queryResolvers = {
 
     return dbUser ? dbUserToUser(dbUser) : null
   },
-  randomTracks: async (_: never, __: never, context: Context) => {
+  randomTracks: async function randomTracksResolver(
+    _: never, 
+    __: never, 
+    context: Context
+  ): Promise<Track[]> {
     checkAuth(context)
     try {
-      const response = await fetch(`${config.DEEZER_API_URI}/search?q=random&limit=21`)
+      const genres = [
+        "rock", "pop", "rap", "jazz", "classical", 
+        "electronic", "indie", "blues", "reggae", "metal"
+      ]
+      
+      const randomGenre = genres[Math.floor(Math.random() * genres.length)]
+      
+      const randomIndex = Math.floor(Math.random() * 900)
+      
+      const response = await fetch(`${config.DEEZER_API_URI}/search?q=genre:"${randomGenre}"&index=${randomIndex}&limit=21`)
 
       if (!response.ok) {
         throw new Error(`Erreur Deezer: ${response.status}`)
@@ -49,11 +62,11 @@ export const queryResolvers = {
 
       const jsonData = await response.json() as DeezerResponse
 
-      if (!jsonData.data) {
-        return []
+      if (!jsonData.data || jsonData.data.length === 0) {
+        return this.randomTracks(_, __, context)
       }
 
-      return jsonData.data
+      return jsonData.data.sort(() => Math.random() - 0.5)
     } catch (error) {
       console.error("Erreur lors de la recherche Deezer:", error)
       throw new Error("Impossible de récupérer les pistes depuis Deezer")

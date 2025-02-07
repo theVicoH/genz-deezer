@@ -4,7 +4,7 @@ import type { Track } from "../../entities/musics"
 export class TracksUseCase {
   constructor(private trackRepository: TracksRepository) {}
 
-  async randomTracks(): Promise<Track[]> {
+  async randomTracks(): Promise<{ randomTracks: Track[] }> {
     return this.trackRepository.randomTracks()
   }
 }
