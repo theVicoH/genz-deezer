@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import * as z from "zod"
 
-
 import { Alert, AlertDescription } from "../atoms/alert"
 import { Button } from "../atoms/button"
 import { Input } from "../atoms/input"
@@ -15,11 +14,11 @@ const registerSchema = z
   .object({
     email: z.string().email("Email invalide"),
     password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
-    confirmPassword: z.string()
+    confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",
-    path: ["confirmPassword"]
+    path: ["confirmPassword"],
   })
 
 type RegisterFormValues = z.infer<typeof registerSchema>
@@ -27,13 +26,13 @@ type RegisterFormValues = z.infer<typeof registerSchema>
 const RegisterForm = () => {
   const { register, isLoading, error } = useAuth()
   const navigate = useNavigate()
-  
+
   const {
     register: registerField,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema)
+    resolver: zodResolver(registerSchema),
   })
 
   const onSubmit = (values: RegisterFormValues) => {
@@ -50,25 +49,13 @@ const RegisterForm = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Mot de passe</Label>
-          <Input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            {...registerField("password")}
-          />
+          <Input type="password" id="password" placeholder="Enter your password" {...registerField("password")} />
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-          <Input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm your password"
-            {...registerField("confirmPassword")}
-          />
-          {errors.confirmPassword && (
-            <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
-          )}
+          <Input type="password" id="confirmPassword" placeholder="Confirm your password" {...registerField("confirmPassword")} />
+          {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
         </div>
         {error && (
           <Alert variant="destructive">

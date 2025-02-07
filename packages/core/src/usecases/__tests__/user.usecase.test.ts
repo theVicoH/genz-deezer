@@ -58,5 +58,5 @@ describe("UserUseCase", () => {
       expect(mockUserRepository.updateProfile).not.toHaveBeenCalled()
     })
   })
-  
+
 })

@@ -1,5 +1,5 @@
 import type { UserRepository } from "./ports"
-import type { User } from "@/entities/user"
+import type { User } from "../../entities/user"
 
 // UserUseCase
 export class UserUseCase {
@@ -17,5 +17,4 @@ export class UserUseCase {
     return this.userRepository.updateProfile(email)
   }
 }
-
 

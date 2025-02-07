@@ -4,11 +4,7 @@ import { config } from "./config/env"
 
 import type { Context } from "./types"
 
-export const getContext = async ({
-  req
-}: {
-  req: { headers: { authorization?: string } }
-}): Promise<Context> => {
+export const getContext = async ({ req }: { req: { headers: { authorization?: string } } }): Promise<Context> => {
   const auth = req.headers.authorization || ""
 
   if (!auth) {

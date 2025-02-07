@@ -21,5 +21,6 @@ export const typeDefs = `#graphql
     login(email: String!, password: String!): AuthPayload!
     updateProfile(email: String!): User!
     deleteAccount: Boolean!
+    getCurrentUser: User
   }
 `

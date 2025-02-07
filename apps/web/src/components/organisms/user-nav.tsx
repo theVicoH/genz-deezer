@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 
 import { Avatar, AvatarFallback } from "../atoms/avatar"
@@ -8,17 +9,21 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "../atoms/dropdown-menu"
 
-import { useAuthStore } from "@/stores/auth-store"
+import { authTokenStateUseCase } from "@/lib/auth"
+import { userUseCase } from "@/lib/usecases"
 
 const UserNav = () => {
   const navigate = useNavigate()
-  const { user, clearAuth } = useAuthStore()
+  const { data: user } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: () => userUseCase.getCurrentUser(),
+  })
 
   const handleLogout = () => {
-    clearAuth()
+    authTokenStateUseCase.clearToken()
     navigate("/login")
   }
 

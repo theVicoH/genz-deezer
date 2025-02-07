@@ -1,9 +1,9 @@
 import { Outlet, Navigate } from "react-router-dom"
 
-import { useAuthStore } from "@/stores/auth-store"
+import { authTokenStateUseCase } from "@/lib/auth"
 
 const ProtectedLayout = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated())
+  const isAuthenticated = authTokenStateUseCase.isAuthenticated()
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />

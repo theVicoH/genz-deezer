@@ -8,13 +8,12 @@ import { typeDefs } from "./schema/type-defs"
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
 })
 
 const { url } = await startStandaloneServer(server, {
   listen: { port: Number(config.SERVER_PORT) },
-  context: getContext
+  context: getContext,
 })
 
-/* eslint-disable no-console */
 console.log(`🚀 Server ready at: ${url}`)

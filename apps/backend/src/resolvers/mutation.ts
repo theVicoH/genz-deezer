@@ -1,13 +1,6 @@
 import bcryptjs from "bcryptjs"
 
-import type {
-  Context,
-  MutationRegisterArgs,
-  MutationLoginArgs,
-  MutationUpdateProfileArgs,
-  AuthPayload,
-  DBUser
-} from "@/types"
+import type { Context, MutationRegisterArgs, MutationLoginArgs, MutationUpdateProfileArgs, AuthPayload, DBUser } from "@/types"
 
 import { sql } from "@/config/db"
 import { generateToken, checkAuth } from "@/utils/auth"
@@ -38,7 +31,7 @@ export const mutationResolvers = {
 
     return {
       token,
-      user
+      user,
     }
   },
 
@@ -64,7 +57,7 @@ export const mutationResolvers = {
 
     return {
       token,
-      user
+      user,
     }
   },
 
@@ -101,7 +94,7 @@ export const mutationResolvers = {
 
   getCurrentUser: async (_: never, __: never, context: Context) => {
     const userId = checkAuth(context)
-    
+
     const [dbUser] = await sql<DBUser[]>`
       SELECT id, email, created_at
       FROM users 
@@ -113,5 +106,5 @@ export const mutationResolvers = {
     }
 
     return dbUserToUser(dbUser)
-  }
+  },
 }

@@ -1,27 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "es2020",
-    "allowJs": true,
-    "declaration": true,
+    "target": "es6",
+    "module": "commonjs",
     "outDir": "./dist",
+    "esModuleInterop": true,
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "checkJs": true,
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "core/*": ["../../packages/core/src/*"],
+      "mongodb/*": ["../../packages/mongodb/src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "*.config.ts"
-  ],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

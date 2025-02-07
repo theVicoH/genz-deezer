@@ -12,25 +12,22 @@ import { Label } from "@/components/atoms/label"
 import { userUseCase } from "@/lib/usecases.ts"
 
 const profileSchema = z.object({
-  email: z.string().email("Email invalide")
+  email: z.string().email("Email invalide"),
 })
 
 type ProfileFormValues = z.infer<typeof profileSchema>
 
-
 const ProfileCard = () => {
-
   const { data: user, isLoading } = useQuery({
     queryKey: ["currentUser"],
-    queryFn: () => userUseCase.getCurrentUser()
+    queryFn: () => userUseCase.getCurrentUser(),
   })
-  
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     values: {
-      email: user?.email ?? ""
-    }
+      email: user?.email ?? "",
+    },
   })
 
   const onSubmit = (values: ProfileFormValues) => {
@@ -40,7 +37,7 @@ const ProfileCard = () => {
   useEffect(() => {
     if (user) {
       form.reset({
-        email: user.email
+        email: user.email,
       })
     }
   }, [user, form])
@@ -62,9 +59,7 @@ const ProfileCard = () => {
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" placeholder="Enter your new email" {...form.register("email")} />
-              {form.formState.errors.email && (
-                <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>
-              )}
+              {form.formState.errors.email && <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>}
             </div>
             <Button type="submit">Enregistrer</Button>
           </form>

@@ -43,7 +43,7 @@ describe("AuthUseCase", () => {
 
   describe("register", () => {
     const validCredentials: AuthCredentials = {
-      email: "test@example.com", 
+      email: "test@example.com",
       password: "password123"
     }
 
@@ -56,7 +56,7 @@ describe("AuthUseCase", () => {
     it("should validate credentials before registration", async () => {
       const invalidCredentials: AuthCredentials = {
         email: "invalid-email",
-        password: "123"  
+        password: "123"
       }
 
       await expect(authUseCase.register(invalidCredentials)).rejects.toThrow()

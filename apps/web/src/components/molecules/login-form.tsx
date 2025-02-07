@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/use-auth"
 
 const loginSchema = z.object({
   email: z.string().email("Email invalide"),
-  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères")
+  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -20,13 +20,13 @@ type LoginFormValues = z.infer<typeof loginSchema>
 const LoginForm = () => {
   const { login, isLoading, error } = useAuth()
   const navigate = useNavigate()
-  
+
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
   })
 
   const onSubmit = (values: LoginFormValues) => {
@@ -43,12 +43,7 @@ const LoginForm = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Mot de passe</Label>
-          <Input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            {...register("password")}
-          />
+          <Input type="password" id="password" placeholder="Enter your password" {...register("password")} />
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
         {error && (

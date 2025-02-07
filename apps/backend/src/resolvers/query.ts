@@ -4,7 +4,6 @@ import { sql } from "@/config/db"
 import { checkAuth } from "@/utils/auth"
 import { dbUserToUser } from "@/utils/user"
 
-
 export const queryResolvers = {
   me: async (_: never, __: never, context: Context) => {
     const userId = checkAuth(context)
@@ -36,5 +35,5 @@ export const queryResolvers = {
     `
 
     return dbUser ? dbUserToUser(dbUser) : null
-  }
+  },
 }

@@ -13,8 +13,8 @@ const mockTracks = [
     artist: { name: "Ed Sheeran" },
     album: {
       title: "÷",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/001/cover_medium.jpg"
-    }
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/001/cover_medium.jpg",
+    },
   },
   {
     id: 2,
@@ -22,8 +22,8 @@ const mockTracks = [
     artist: { name: "The Weeknd" },
     album: {
       title: "After Hours",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/002/cover_medium.jpg"
-    }
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/002/cover_medium.jpg",
+    },
   },
   {
     id: 3,
@@ -31,9 +31,9 @@ const mockTracks = [
     artist: { name: "Tones and I" },
     album: {
       title: "The Kids Are Coming",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/003/cover_medium.jpg"
-    }
-  }
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/003/cover_medium.jpg",
+    },
+  },
 ]
 
 const MusicPlayer = () => {
@@ -73,21 +73,11 @@ const MusicPlayer = () => {
 
         <CardContent>
           <div className="relative mb-4 aspect-square">
-            <img
-              src="/api/placeholder/400/400"
-              alt={currentTrack?.album?.title}
-              className="h-full w-full rounded-lg object-cover"
-            />
+            <img src="/api/placeholder/400/400" alt={currentTrack?.album?.title} className="h-full w-full rounded-lg object-cover" />
           </div>
 
           <div className="space-y-2">
-            <Slider
-              value={progress}
-              onValueChange={handleProgressChange}
-              max={100}
-              step={1}
-              className="my-4"
-            />
+            <Slider value={progress} onValueChange={handleProgressChange} max={100} step={1} className="my-4" />
             <div className="flex justify-between text-sm">
               <span>{Math.floor((progress[0] / 100) * 3.5)}:00</span>
               <span>3:30</span>

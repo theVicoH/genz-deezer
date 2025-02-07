@@ -23,7 +23,9 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@genz-deezer/core": ["../../packages/core/src"],
+      "@genz-deezer/infrastructure": ["../../packages/infrastructure/src"]
     }
   },
   "include": ["src"]
