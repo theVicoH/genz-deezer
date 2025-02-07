@@ -1,5 +1,5 @@
-import MusicPlayer from "@/components/molecules/music-player"
 import UserNav from "@/components/organisms/user-nav"
+import MusicRandomizer from "./temp"
 
 const Dashboard = () => {
   return (
@@ -8,7 +8,8 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold">Tableau de bord</h1>
         <UserNav />
       </div>
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
+      <MusicRandomizer />
     </div>
   )
 }
