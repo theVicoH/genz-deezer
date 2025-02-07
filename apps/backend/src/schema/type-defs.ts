@@ -29,6 +29,7 @@ export const typeDefs = `#graphql
     id: ID!
     title: String!
     cover: String
+    cover_medium: String
   }
 
 

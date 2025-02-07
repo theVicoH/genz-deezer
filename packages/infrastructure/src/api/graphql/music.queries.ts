@@ -13,6 +13,7 @@ export const RANDOM_TRACKS = gql`
       duration
       album {
         cover
+        cover_medium
         title
       }
     }

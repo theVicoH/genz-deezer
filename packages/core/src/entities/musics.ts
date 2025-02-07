@@ -16,4 +16,5 @@ export interface Album {
   id: number
   title: string
   cover: string
+  cover_medium: string
 }
