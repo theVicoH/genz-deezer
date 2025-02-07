@@ -51,7 +51,7 @@ const fileNamingPlugin = {
 
 export default tseslint.config(
   {
-    ignores: ["**/dist/**", "**/build/**", "**/node_modules/**", "_webpack_front/**"]
+    ignores: ["**/dist/**", "**/build/**", "**/node_modules/**", "_webpack_front/**", "**/vite.config.ts"]
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

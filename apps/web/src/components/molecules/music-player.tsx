@@ -13,8 +13,8 @@ const mockTracks = [
     artist: { name: "Ed Sheeran" },
     album: {
       title: "÷",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/001/cover_medium.jpg",
-    },
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/001/cover_medium.jpg"
+    }
   },
   {
     id: 2,
@@ -22,8 +22,8 @@ const mockTracks = [
     artist: { name: "The Weeknd" },
     album: {
       title: "After Hours",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/002/cover_medium.jpg",
-    },
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/002/cover_medium.jpg"
+    }
   },
   {
     id: 3,
@@ -31,9 +31,9 @@ const mockTracks = [
     artist: { name: "Tones and I" },
     album: {
       title: "The Kids Are Coming",
-      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/003/cover_medium.jpg",
-    },
-  },
+      cover_medium: "https://e-cdns-images.dzcdn.net/images/cover/000/000/003/cover_medium.jpg"
+    }
+  }
 ]
 
 const MusicPlayer = () => {

@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "../atoms/dropdown-menu"
 
 import { authTokenStateUseCase } from "@/lib/auth"
@@ -19,7 +19,7 @@ const UserNav = () => {
   const navigate = useNavigate()
   const { data: user } = useQuery({
     queryKey: ["currentUser"],
-    queryFn: () => userUseCase.getCurrentUser(),
+    queryFn: () => userUseCase.getCurrentUser()
   })
 
   const handleLogout = () => {

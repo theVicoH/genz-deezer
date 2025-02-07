@@ -5,7 +5,7 @@ import { ApolloAuthRepository, ApolloUserRepository } from "@genz-deezer/infrast
 import { authTokenStateUseCase } from "@/lib/auth"
 
 const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_API_URI,
+  uri: import.meta.env.VITE_API_URI
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -14,14 +14,14 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
+      authorization: token ? `Bearer ${token}` : ""
+    }
   }
 })
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 })
 
 export const authRepository = new ApolloAuthRepository(client)

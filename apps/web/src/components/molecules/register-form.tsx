@@ -14,11 +14,11 @@ const registerSchema = z
   .object({
     email: z.string().email("Email invalide"),
     password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
-    confirmPassword: z.string(),
+    confirmPassword: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",
-    path: ["confirmPassword"],
+    path: ["confirmPassword"]
   })
 
 type RegisterFormValues = z.infer<typeof registerSchema>
@@ -30,9 +30,9 @@ const RegisterForm = () => {
   const {
     register: registerField,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(registerSchema)
   })
 
   const onSubmit = (values: RegisterFormValues) => {

@@ -35,5 +35,5 @@ export const queryResolvers = {
     `
 
     return dbUser ? dbUserToUser(dbUser) : null
-  },
+  }
 }

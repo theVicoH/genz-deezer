@@ -12,7 +12,7 @@ import { Label } from "@/components/atoms/label"
 import { userUseCase } from "@/lib/usecases.ts"
 
 const profileSchema = z.object({
-  email: z.string().email("Email invalide"),
+  email: z.string().email("Email invalide")
 })
 
 type ProfileFormValues = z.infer<typeof profileSchema>
@@ -20,14 +20,14 @@ type ProfileFormValues = z.infer<typeof profileSchema>
 const ProfileCard = () => {
   const { data: user, isLoading } = useQuery({
     queryKey: ["currentUser"],
-    queryFn: () => userUseCase.getCurrentUser(),
+    queryFn: () => userUseCase.getCurrentUser()
   })
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     values: {
-      email: user?.email ?? "",
-    },
+      email: user?.email ?? ""
+    }
   })
 
   const onSubmit = (values: ProfileFormValues) => {
@@ -37,7 +37,7 @@ const ProfileCard = () => {
   useEffect(() => {
     if (user) {
       form.reset({
-        email: user.email,
+        email: user.email
       })
     }
   }, [user, form])

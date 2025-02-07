@@ -12,5 +12,5 @@ export const sql = postgres({
   timeout: 10,
   max: 10,
   idle_timeout: 20,
-  connect_timeout: 10,
+  connect_timeout: 10
 })

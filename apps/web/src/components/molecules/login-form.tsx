@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/use-auth"
 
 const loginSchema = z.object({
   email: z.string().email("Email invalide"),
-  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
+  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères")
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -24,9 +24,9 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginSchema)
   })
 
   const onSubmit = (values: LoginFormValues) => {

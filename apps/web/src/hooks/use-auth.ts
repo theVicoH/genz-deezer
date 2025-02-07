@@ -2,21 +2,19 @@ import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 
 import { useToast } from "@/hooks/use-toast"
-import { authUseCase } from "@/lib/auth"
-import { useAuthStore } from "@/stores/auth-store"
+import { authTokenStateUseCase, authUseCase } from "@/lib/auth"
 
 export function useAuth() {
   const navigate = useNavigate()
-  const setAuth = useAuthStore((state) => state.setAuth)
   const { toast } = useToast()
 
   const loginMutation = useMutation({
     mutationFn: (credentials: { email: string; password: string }) => authUseCase.login(credentials),
     onSuccess: (data) => {
-      setAuth(data.token, data.user)
+      authTokenStateUseCase.setToken(data.token)
       toast({
         title: "Connexion réussie !",
-        description: "Vous êtes maintenant connecté.",
+        description: "Vous êtes maintenant connecté."
       })
       navigate("/dashboard")
     },
@@ -24,9 +22,9 @@ export function useAuth() {
       toast({
         variant: "destructive",
         title: "Erreur",
-        description: error.message,
+        description: error.message
       })
-    },
+    }
   })
 
   const registerMutation = useMutation({
@@ -34,7 +32,7 @@ export function useAuth() {
     onSuccess: () => {
       toast({
         title: "Inscription réussie !",
-        description: "Vous pouvez maintenant vous connecter.",
+        description: "Vous pouvez maintenant vous connecter."
       })
       navigate("/login")
     },
@@ -42,15 +40,15 @@ export function useAuth() {
       toast({
         variant: "destructive",
         title: "Erreur",
-        description: error.message,
+        description: error.message
       })
-    },
+    }
   })
 
   return {
     login: loginMutation.mutate,
     register: registerMutation.mutate,
     isLoading: loginMutation.isPending || registerMutation.isPending,
-    error: loginMutation.error || registerMutation.error,
+    error: loginMutation.error || registerMutation.error
   }
 }

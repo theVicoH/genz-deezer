@@ -31,7 +31,7 @@ export const mutationResolvers = {
 
     return {
       token,
-      user,
+      user
     }
   },
 
@@ -57,7 +57,7 @@ export const mutationResolvers = {
 
     return {
       token,
-      user,
+      user
     }
   },
 
@@ -106,5 +106,5 @@ export const mutationResolvers = {
     }
 
     return dbUserToUser(dbUser)
-  },
+  }
 }
