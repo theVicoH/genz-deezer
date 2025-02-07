@@ -15,26 +15,33 @@ import { dbUserToUser } from "@/utils/user"
 
 export const mutationResolvers = {
   register: async (_: never, { email, password }: MutationRegisterArgs): Promise<AuthPayload> => {
-    const hashedPassword = await bcryptjs.hash(password, 10)
+    const [existingUser] = await sql<DBUser[]>`
+      SELECT id 
+      FROM users 
+      WHERE email = ${email}
+    `
 
-    try {
-      const [dbUser] = await sql<DBUser[]>`
-        INSERT INTO users (email, password)
-        VALUES (${email}, ${hashedPassword})
-        RETURNING id, email, created_at
-      `
-
-      const token = generateToken(dbUser.id)
-      const user = dbUserToUser(dbUser)
-
-      return {
-        token,
-        user
-      }
-    } catch {
+    if (existingUser) {
       throw new Error("Cet email est déjà utilisé")
     }
+
+    const hashedPassword = await bcryptjs.hash(password, 10)
+
+    const [dbUser] = await sql<DBUser[]>`
+      INSERT INTO users (email, password)
+      VALUES (${email}, ${hashedPassword})
+      RETURNING id, email, created_at
+    `
+
+    const token = generateToken(dbUser.id)
+    const user = dbUserToUser(dbUser)
+
+    return {
+      token,
+      user
+    }
   },
+
   login: async (_: never, { email, password }: MutationLoginArgs): Promise<AuthPayload> => {
     const [dbUser] = await sql<DBUser[]>`
       SELECT *
@@ -60,8 +67,19 @@ export const mutationResolvers = {
       user
     }
   },
+
   updateProfile: async (_: never, { email }: MutationUpdateProfileArgs, context: Context) => {
     const userId = checkAuth(context)
+
+    const [existingUser] = await sql<DBUser[]>`
+      SELECT id 
+      FROM users 
+      WHERE email = ${email} AND id != ${userId}
+    `
+
+    if (existingUser) {
+      throw new Error("Cet email est déjà utilisé")
+    }
 
     const [dbUser] = await sql<DBUser[]>`
       UPDATE users
@@ -72,11 +90,28 @@ export const mutationResolvers = {
 
     return dbUserToUser(dbUser)
   },
+
   deleteAccount: async (_: never, __: never, context: Context): Promise<boolean> => {
     const userId = checkAuth(context)
 
     await sql`DELETE FROM users WHERE id = ${userId}`
 
     return true
+  },
+
+  getCurrentUser: async (_: never, __: never, context: Context) => {
+    const userId = checkAuth(context)
+    
+    const [dbUser] = await sql<DBUser[]>`
+      SELECT id, email, created_at
+      FROM users 
+      WHERE id = ${userId}
+    `
+
+    if (!dbUser) {
+      throw new Error("Utilisateur non trouvé")
+    }
+
+    return dbUserToUser(dbUser)
   }
 }
