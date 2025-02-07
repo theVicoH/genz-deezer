@@ -12,9 +12,7 @@ describe("AuthUseCase", () => {
   beforeEach(() => {
     mockAuthRepository = {
       login: vi.fn(),
-      register: vi.fn(),
-      getCurrentUser: vi.fn(),
-      updateProfile: vi.fn()
+      register: vi.fn()
     }
 
     authUseCase = new AuthUseCase(mockAuthRepository)
@@ -66,11 +64,4 @@ describe("AuthUseCase", () => {
     })
   })
 
-  describe("getCurrentUser", () => {
-    it("should call repository getCurrentUser", async () => {
-      await authUseCase.getCurrentUser()
-
-      expect(mockAuthRepository.getCurrentUser).toHaveBeenCalled()
-    })
-  })
 })
