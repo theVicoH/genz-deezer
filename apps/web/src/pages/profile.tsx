@@ -1,9 +1,9 @@
-import ProfileCard from "@/components/molecules/profile-card"
+import ProfileForm from "@/components/molecules/profile-form"
 
 const Profile = () => {
   return (
     <div className="flex w-full flex-1 items-center justify-center">
-      <ProfileCard />
+      <ProfileForm />
     </div>
   )
 }

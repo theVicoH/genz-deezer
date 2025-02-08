@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { useQuery } from "@tanstack/react-query"
+import { motion } from "motion/react"
 
 import Logo from "@/assets/icons/logo.svg"
 import TrackCard from "@/components/atoms/track-card"
@@ -47,9 +48,16 @@ const DeezerPlayer = () => {
   }, [currentTrackIndex, data?.randomTracks])
 
   if (isLoading || !data) {
-    return (<div className="flex items-center justify-center">
-      <Logo />
-    </div>)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Logo />
+        </motion.div>
+      </div>
+    )
   }
 
   const currentTrack = data.randomTracks[currentTrackIndex]
@@ -85,7 +93,7 @@ const DeezerPlayer = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="max-w-md text-center">
           <h2 className="text-foreground/40 text-2xl font-medium">{currentTrack.title}</h2>
           <p className="text-foreground/30 font text-lg">{currentTrack.artist.name}</p>
         </div>

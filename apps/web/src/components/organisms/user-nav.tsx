@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 
 import { Avatar, AvatarFallback } from "../atoms/avatar"
@@ -12,15 +11,12 @@ import {
   DropdownMenuTrigger
 } from "../atoms/dropdown-menu"
 
+import { useCurrentUser } from "@/hooks/use-current-user"
 import { authTokenStateUseCase } from "@/lib/usecases"
-import { userUseCase } from "@/lib/usecases"
 
 const UserNav = () => {
   const navigate = useNavigate()
-  const { data: user } = useQuery({
-    queryKey: ["currentUser"],
-    queryFn: () => userUseCase.getCurrentUser()
-  })
+  const { data: user } = useCurrentUser()
 
   const handleLogout = () => {
     authTokenStateUseCase.clearToken()
