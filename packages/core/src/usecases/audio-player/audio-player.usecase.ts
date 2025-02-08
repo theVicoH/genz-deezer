@@ -1,9 +1,8 @@
+import type { AudioPlayerRepository } from "./ports"
+import type { AudioPlayer } from "../../entities/audio-player"
 
-import type { PlayerAudioRepository } from "./ports"
-import type { PlayerAudio } from "../../entities/player-audio"
-
-export class PlayerAudioUseCase {
-  constructor(private playerRepository: PlayerAudioRepository) {}
+export class AudioPlayerUseCase {
+  constructor(private playerRepository: AudioPlayerRepository) {}
 
   async play(trackUrl: string): Promise<void> {
     await this.playerRepository.play(trackUrl)
@@ -17,7 +16,7 @@ export class PlayerAudioUseCase {
     this.playerRepository.seek(time)
   }
 
-  getCurrentState(): PlayerAudio {
+  getCurrentState(): AudioPlayer {
     return {
       currentTime: this.playerRepository.getCurrentTime(),
       isPlaying: this.playerRepository.isPlaying(),

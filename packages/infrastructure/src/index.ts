@@ -14,4 +14,4 @@ export * from "./repositories/tracks.repository"
 
 // HTML5 Player audio repositories
 
-export * from "./repositories/html5-player-audio.repository"
+export * from "./repositories/html5-audio-player.repository"

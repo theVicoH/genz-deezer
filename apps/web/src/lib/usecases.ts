@@ -1,4 +1,4 @@
-import { AuthUseCase, UserUseCase, AuthTokenStateUseCase, TracksUseCase, PlayerAudioUseCase } from "@genz-deezer/core"
+import { AuthUseCase, UserUseCase, AuthTokenStateUseCase, TracksUseCase, AudioPlayerUseCase } from "@genz-deezer/core"
 
 import { authRepository, userRepository, tracksRepository, authTokenStateRepository, html5PlayerAudioRepository } from "./repositories"
 
@@ -18,4 +18,4 @@ export const tracksUseCase = new TracksUseCase(tracksRepository)
 
 // Player Audio usecase
 
-export const playerAudioUseCase = new PlayerAudioUseCase(html5PlayerAudioRepository)
+export const playerAudioUseCase = new AudioPlayerUseCase(html5PlayerAudioRepository)

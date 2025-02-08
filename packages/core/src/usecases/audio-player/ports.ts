@@ -1,4 +1,4 @@
-export interface PlayerAudioRepository {
+export interface AudioPlayerRepository {
   play(trackUrl: string): Promise<void>
   pause(): void
   seek(time: number): void

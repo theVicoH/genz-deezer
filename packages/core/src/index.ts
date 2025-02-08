@@ -6,7 +6,7 @@ export * from "./entities/auth"
 
 export * from "./entities/musics"
 
-export * from "./entities/player-audio"
+export * from "./entities/audio-player"
 
 // Auth UseCases
 
@@ -30,6 +30,6 @@ export * from "./usecases/musics/tracks.usecase"
 
 // Player Audio UseCases
 
-export * from "./usecases/player-audio/ports"
+export * from "./usecases/audio-player/ports"
 
-export * from "./usecases/player-audio/player-audio.usecase"
+export * from "./usecases/audio-player/audio-player.usecase"

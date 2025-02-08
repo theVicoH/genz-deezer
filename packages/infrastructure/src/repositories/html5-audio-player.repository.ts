@@ -1,9 +1,9 @@
-import type { PlayerAudioRepository } from "@genz-deezer/core"
+import type { AudioPlayerRepository } from "@genz-deezer/core"
 
-export class HTML5PlayerAudioRepository implements PlayerAudioRepository {
+export class HTML5AudioPlayerRepository implements AudioPlayerRepository {
   private audio: HTMLAudioElement
   private onTrackEndCallback?: () => void
-  
+
   constructor() {
     this.audio = new Audio()
     this.audio.addEventListener("ended", () => {
