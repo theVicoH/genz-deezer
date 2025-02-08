@@ -86,7 +86,7 @@ export const mutationResolvers = {
         WHERE id = ${userId}
         RETURNING id, email, created_at
       `
-
+      
       return { 
         success: true,
         user: dbUserToUser(dbUser)
