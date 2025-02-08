@@ -1,16 +1,16 @@
 import type { AuthRepository } from "./ports"
-import type { AuthCredentials, AuthToken } from "../../entities/auth"
+import type { AuthCredentials, LoginResponse, RegisterReponse } from "../../entities/auth"
 
 export class AuthUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
-  async login(credentials: AuthCredentials): Promise<AuthToken> {
+  async login(credentials: AuthCredentials): Promise<LoginResponse> {
     this.validateCredentials(credentials)
 
     return this.authRepository.login(credentials)
   }
 
-  async register(credentials: AuthCredentials): Promise<AuthToken> {
+  async register(credentials: AuthCredentials): Promise<RegisterReponse> {
     this.validateCredentials(credentials)
 
     return this.authRepository.register(credentials)

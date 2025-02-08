@@ -1,4 +1,4 @@
-import type { Context, DBUser, QueryUserArgs } from "@/types"
+import type { Context, DBUser, QueryUserArgs } from "@/types/auth"
 import type { DeezerResponse, Track } from "@/types/deezer"
 
 import { sql } from "@/config/db"

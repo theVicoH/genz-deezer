@@ -3,6 +3,10 @@ export interface AuthCredentials {
   password: string
 }
 
-export interface AuthToken {
+export interface LoginResponse {
   token: string
+}
+
+export interface RegisterReponse {
+  success: string
 }

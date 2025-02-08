@@ -1,13 +1,13 @@
-import type { AuthCredentials, AuthToken } from "../../entities/auth"
+import type { AuthCredentials, LoginResponse, RegisterReponse } from "../../entities/auth"
 
 export interface AuthRepository {
-  login(credentials: AuthCredentials): Promise<AuthToken>
-  register(credentials: AuthCredentials): Promise<AuthToken>
+  login(credentials: AuthCredentials): Promise<LoginResponse>
+  register(credentials: AuthCredentials): Promise<RegisterReponse>
 }
 
 export interface AuthTokenStateRepository {
-  getToken(): string | null;
-  setToken(token: string): void;
-  clearToken(): void;
-  isAuthenticated(): boolean;
+  getToken(): string | null
+  setToken(token: string): void
+  clearToken(): void
+  isAuthenticated(): boolean
 }

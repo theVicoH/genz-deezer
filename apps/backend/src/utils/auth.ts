@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-import type { Context } from "@/types"
+import type { Context } from "@/types/auth"
 
 import { config } from "@/config/env"
 

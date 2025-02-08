@@ -15,9 +15,13 @@ export interface Context {
   userId: string | null
 }
 
-export interface AuthPayload {
+export interface LoginResponse {
   token: string
   user: User
+}
+
+export interface RegisterReponse {
+  success: boolean
 }
 
 export interface MutationRegisterArgs {

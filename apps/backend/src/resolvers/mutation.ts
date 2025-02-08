@@ -1,41 +1,46 @@
 import bcryptjs from "bcryptjs"
 
-import type { Context, MutationRegisterArgs, MutationLoginArgs, MutationUpdateProfileArgs, AuthPayload, DBUser } from "@/types"
+import type {
+  Context,
+  MutationRegisterArgs,
+  MutationLoginArgs,
+  MutationUpdateProfileArgs,
+  LoginResponse,
+  DBUser,
+  RegisterReponse
+} from "@/types/auth"
 
 import { sql } from "@/config/db"
 import { generateToken, checkAuth } from "@/utils/auth"
 import { dbUserToUser } from "@/utils/user"
 
 export const mutationResolvers = {
-  register: async (_: never, { email, password }: MutationRegisterArgs): Promise<AuthPayload> => {
-    const [existingUser] = await sql<DBUser[]>`
-      SELECT id 
-      FROM users 
-      WHERE email = ${email}
-    `
+  register: async (_: never, { email, password }: MutationRegisterArgs): Promise<RegisterReponse> => {
+    try {
+      const [existingUser] = await sql<DBUser[]>`
+        SELECT id 
+        FROM users 
+        WHERE email = ${email}
+      `
 
-    if (existingUser) {
-      throw new Error("Cet email est déjà utilisé")
-    }
+      if (existingUser) {
+        throw new Error("Cet email est déjà utilisé")
+      }
 
-    const hashedPassword = await bcryptjs.hash(password, 10)
+      const hashedPassword = await bcryptjs.hash(password, 10)
 
-    const [dbUser] = await sql<DBUser[]>`
-      INSERT INTO users (email, password)
-      VALUES (${email}, ${hashedPassword})
-      RETURNING id, email, created_at
-    `
+      await sql`
+        INSERT INTO users (email, password)
+        VALUES (${email}, ${hashedPassword})
+      `
 
-    const token = generateToken(dbUser.id)
-    const user = dbUserToUser(dbUser)
-
-    return {
-      token,
-      user
+      return { success: true }
+    } catch {
+      return { success: false }
     }
   },
 
-  login: async (_: never, { email, password }: MutationLoginArgs): Promise<AuthPayload> => {
+  login: async (_: never, { email, password }: MutationLoginArgs): Promise<LoginResponse> => {
     const [dbUser] = await sql<DBUser[]>`
       SELECT *
       FROM users 

@@ -1,4 +1,4 @@
-import type { DBUser, User } from "@/types"
+import type { DBUser, User } from "@/types/auth"
 
 export const dbUserToUser = (dbUser: DBUser): User => ({
   id: dbUser.id,

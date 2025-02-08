@@ -5,9 +5,13 @@ export const typeDefs = `#graphql
     createdAt: String!
   }
 
-  type AuthPayload {
+  type LoginResponse {
     token: String!
     user: User!
+  }
+
+  type RegisterReponse {
+    success: Boolean!
   }
 
   type Track {
@@ -41,8 +45,8 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    register(email: String!, password: String!): AuthPayload!
-    login(email: String!, password: String!): AuthPayload!
+    register(email: String!, password: String!): RegisterReponse!
+    login(email: String!, password: String!): LoginResponse!
     updateProfile(email: String!): User!
     deleteAccount: Boolean!
     getCurrentUser: User
