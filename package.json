@@ -7,8 +7,6 @@
     "web": "pnpm --filter web dev",
     "backend": "pnpm --filter backend dev",
     "build": "pnpm -r build",
-    "build:core": "pnpm --filter @genz-deezer/core build",
-    "build:infrastructure": "pnpm --filter @genz-deezer/infrastructure build",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "test": "pnpm -r test"
