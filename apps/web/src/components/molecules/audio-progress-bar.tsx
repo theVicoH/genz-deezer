@@ -1,13 +1,13 @@
 import { Slider } from "@/components/atoms/slider"
 import { formatTime } from "@/utils/format-time"
 
-type ProgressBarProps = {
+type AudioProgressBarProps = {
   currentTime: number
   duration: number
   onProgressChange: (values: number[]) => void
 }
 
-const AudioProgressBar = ({ currentTime, duration, onProgressChange }: ProgressBarProps) => (
+const AudioProgressBar = ({ currentTime, duration, onProgressChange }: AudioProgressBarProps) => (
   <div className="w-full max-w-sm">
     <div className="flex items-center space-x-2">
       <span className="text-foreground/50 w-16 text-right text-sm">{formatTime(currentTime)}</span>

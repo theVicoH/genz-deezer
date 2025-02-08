@@ -2,7 +2,7 @@ import { Play, Pause, SkipBack, SkipForward } from "lucide-react"
 
 import { Button } from "@/components/atoms/button"
 
-type PlayerControlsProps = {
+type AudioPlayerControlsProps = {
   isPlaying: boolean
   onPlayPause: () => void
   onPrevious: () => void
@@ -14,7 +14,7 @@ const AudioPlayerControls = ({
   onPlayPause,
   onPrevious,
   onNext
-}: PlayerControlsProps) => (
+}: AudioPlayerControlsProps) => (
   <div className="flex items-center space-x-3">
     <Button size="icon" variant="ghost" onClick={onPrevious}>
       <SkipBack className="h-6 w-6" />
