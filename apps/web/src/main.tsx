@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom"
 
 import App from "./app"
 import { Toaster } from "./components/atoms/toaster"
-import { client } from "./lib/apollo-client"
+import { client } from "./lib/repositories"
 
 import "./index.css"
 

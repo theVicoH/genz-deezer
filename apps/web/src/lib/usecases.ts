@@ -1,15 +1,21 @@
-import { AuthUseCase, UserUseCase, AuthTokenStateUseCase, TracksUseCase } from "@genz-deezer/core"
+import { AuthUseCase, UserUseCase, AuthTokenStateUseCase, TracksUseCase, PlayerAudioUseCase } from "@genz-deezer/core"
 
-import { authRepository, userRepository, tracksRepository } from "./apollo-client"
+import { authRepository, userRepository, tracksRepository, authTokenStateRepository, html5PlayerAudioRepository } from "./repositories"
 
-import { ZustandAuthTokenStateRepository } from "@genz-deezer/infrastructure"
-
-const authTokenStateRepository = new ZustandAuthTokenStateRepository()
+// Auth usecase
 
 export const authUseCase = new AuthUseCase(authRepository)
 
-export const userUseCase = new UserUseCase(userRepository)
-
 export const authTokenStateUseCase = new AuthTokenStateUseCase(authTokenStateRepository)
 
+// User usecase
+
+export const userUseCase = new UserUseCase(userRepository)
+
+// Track usecase
+
 export const tracksUseCase = new TracksUseCase(tracksRepository)
+
+// Player Audio usecase
+
+export const playerAudioUseCase = new PlayerAudioUseCase(html5PlayerAudioRepository)
