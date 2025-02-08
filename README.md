@@ -17,11 +17,11 @@ Le projet utilise une architecture monorepo organisée comme suit :
 ```
 genz-deezer/
 ├── apps/
-│   ├── web/         # Application React
-│   └── backend/     # Serveur GraphQL
+│   ├── web/              # Application React
+│   └── backend/          # Serveur GraphQL
 ├── packages/
-│   ├── core/        # Logique métier partagée
-│   └── infrastructure/  # Code d'infrastructure
+│   ├── core/             # Logique métier partagée
+│   └── infrastructure/   # Code d'infrastructure
 ```
 
 ## 🛠️ Stack Technique
@@ -76,6 +76,14 @@ docker-compose up -d
 
 ### Démarrer l'application
 
+Lancer le front et le back :
+
+```bash
+pnpm dev
+```
+
+Ou manuelement 
+
 Lancer le backend :
 ```bash
 pnpm backend
@@ -91,7 +99,7 @@ pnpm web
 - `pnpm build` - Construction de tous les packages
 - `pnpm test` - Exécution des tests
 - `pnpm lint` - Vérification du code
-- `pnpm dev` - Mode développement
+- `pnpm lint:fix` - Vérification et Fix du code
 
 ## ⚙️ Configuration
 
