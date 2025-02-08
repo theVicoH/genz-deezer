@@ -43,11 +43,9 @@ export const html5AudioPlayerRepository = new HTML5AudioPlayerRepository()
 // User Repositories
 
 export const userRepository = new ApolloUserRepository(client, () =>
-  authTokenStateUseCase.getToken()
-)
+  authTokenStateUseCase.getToken())
 
 // Track Repositories
 
 export const tracksRepository = new ApolloTracksRepository(client, () =>
-  authTokenStateUseCase.getToken()
-)
+  authTokenStateUseCase.getToken())

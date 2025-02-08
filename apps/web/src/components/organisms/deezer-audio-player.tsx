@@ -31,8 +31,8 @@ const DeezerAudioPlayer = () => {
     setCurrentTrackIndex((prev) => (prev === 0 ? data.randomTracks.length - 1 : prev - 1))
   }, [data?.randomTracks])
 
-  const { currentTime, isPlaying, previewDuration, loadAudio, handlePlayPause, handleSeek } =
-    useAudioPlayer(handleNext)
+  const { currentTime, isPlaying, previewDuration, loadAudio, handlePlayPause, handleSeek }
+    = useAudioPlayer(handleNext)
 
   useEffect(() => {
     if (!data?.randomTracks) return
