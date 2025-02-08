@@ -1,6 +1,10 @@
 import { Outlet, Navigate } from "react-router-dom"
 
+import UserNav from "./user-nav"
+
+import DeezerExtendedLogo from "@/assets/icons/logo-extended.svg"
 import { authTokenStateUseCase } from "@/lib/usecases"
+
 
 const ProtectedLayout = () => {
   const isAuthenticated = authTokenStateUseCase.isAuthenticated()
@@ -11,7 +15,13 @@ const ProtectedLayout = () => {
 
   return (
     <div className="min-h-screen">
-      <Outlet />
+      <div className="flex min-h-screen w-full flex-col">
+        <div className="flex items-center justify-between px-8 py-4">
+          <DeezerExtendedLogo /> 
+          <UserNav />
+        </div>
+        <Outlet />
+      </div>
     </div>
   )
 }

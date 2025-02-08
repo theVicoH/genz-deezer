@@ -49,8 +49,8 @@ const ProfileCard = () => {
   if (isLoading) return <div>Chargement...</div>
 
   return (
-    <div>
-      <Card>
+    <div className="flex items-center justify-center">
+      <Card className="min-w-96">
         <CardHeader>
           <CardTitle>Modifier mon profil</CardTitle>
         </CardHeader>

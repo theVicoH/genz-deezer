@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 
 import { useQuery } from "@tanstack/react-query"
 
+import Logo from "@/assets/icons/logo.svg"
 import TrackCard from "@/components/atoms/track-card"
 import PlayerControls from "@/components/molecules/player-controls"
 import ProgressBar from "@/components/molecules/progress-bar"
@@ -46,7 +47,9 @@ const DeezerPlayer = () => {
   }, [currentTrackIndex, data?.randomTracks])
 
   if (isLoading || !data) {
-    return <div className="flex h-screen items-center justify-center">Chargement...</div>
+    return (<div className="flex items-center justify-center">
+      <Logo />
+    </div>)
   }
 
   const currentTrack = data.randomTracks[currentTrackIndex]
@@ -83,8 +86,8 @@ const DeezerPlayer = () => {
         </div>
 
         <div className="text-center">
-          <h2 className="text-2xl font-bold">{currentTrack.title}</h2>
-          <p className="text-muted-foreground text-lg">{currentTrack.artist.name}</p>
+          <h2 className="text-foreground/40 text-2xl font-medium">{currentTrack.title}</h2>
+          <p className="text-foreground/30 font text-lg">{currentTrack.artist.name}</p>
         </div>
 
         <div className="bg-background fixed bottom-0 left-0 right-0 pb-10 pt-2">

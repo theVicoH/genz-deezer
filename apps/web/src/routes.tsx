@@ -4,7 +4,7 @@ import LoginForm from "./components/molecules/login-form"
 import RegisterForm from "./components/molecules/register-form"
 import AuthLayout from "./components/organisms/auth-layout"
 import ProtectedLayout from "./components/organisms/protected-layout"
-import Dashboard from "./pages/dashboard"
+import Home from "./pages/home"
 import Profile from "./pages/profile"
 
 const AppRoutes = () => {
@@ -18,7 +18,7 @@ const AppRoutes = () => {
       </Route>
 
       <Route element={<ProtectedLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
 

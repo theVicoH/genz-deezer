@@ -40,8 +40,9 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="flex w-full flex-col items-center gap-y-8 space-y-6">
+      <h1 className="text-foreground text-4xl font-bold">Deviens GenZ</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input id="email" placeholder="Enter your email" {...registerField("email")} />
