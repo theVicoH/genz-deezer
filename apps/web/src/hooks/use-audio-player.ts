@@ -13,7 +13,6 @@ export const useAudioPlayer = (onTrackEnd: () => void) => {
   const loadAudio = async (trackUrl: string) => {
     try {
       setCurrentTrackUrl(trackUrl)
-      await audioPlayerUseCase.play(trackUrl)
       setIsPlaying(true)
 
       setPreviewDuration(PREVIEW_DURATION_LIMIT)
