@@ -12,12 +12,13 @@ export const useAudioPlayer = (onTrackEnd: () => void) => {
 
   const loadAudio = async () => {
     if (!audioRef.current) return
-
+  
     const audio = audioRef.current
-
+    
     audio.currentTime = 0
     setCurrentTime(0)
-
+    setIsPlaying(false)
+  
     await new Promise((resolve) => {
       audio.load()
       audio.addEventListener("loadedmetadata", () => {
@@ -27,14 +28,13 @@ export const useAudioPlayer = (onTrackEnd: () => void) => {
         resolve(null)
       }, { once: true })
     })
-
-    if (isPlaying) {
-      try {
-        await audio.play()
-      } catch (error) {
-        console.error("Erreur de lecture:", error)
-        setIsPlaying(false)
-      }
+  
+    try {
+      await audio.play()
+      setIsPlaying(true)
+    } catch (error) {
+      console.error("Erreur de lecture:", error)
+      setIsPlaying(false)
     }
   }
 
