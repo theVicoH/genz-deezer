@@ -24,7 +24,7 @@ export class ApolloUserRepository implements UserRepository {
         }
       }
     })
-    
+
     return data.me
   }
 

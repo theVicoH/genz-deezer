@@ -17,4 +17,3 @@ export class UserUseCase {
     return this.userRepository.updateProfile(email)
   }
 }
-

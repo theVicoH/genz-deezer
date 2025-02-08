@@ -11,7 +11,7 @@ export function useUpdateProfile() {
 
   return useMutation({
     mutationFn: async (email: string) => {
-      const response = await userUseCase.updateProfile(email) as unknown as { success: boolean }
+      const response = (await userUseCase.updateProfile(email)) as unknown as { success: boolean }
 
       if (!response.success) {
         throw new Error("La mise à jour du profil a échoué")

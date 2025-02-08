@@ -12,7 +12,8 @@ export function useAuth() {
   const queryClient = useQueryClient()
 
   const loginMutation = useMutation({
-    mutationFn: (credentials: { email: string; password: string }) => authUseCase.login(credentials),
+    mutationFn: (credentials: { email: string; password: string }) =>
+      authUseCase.login(credentials),
     onSuccess: (data) => {
       authTokenStateUseCase.setToken(data.token)
       queryClient.invalidateQueries({ queryKey: [QueryKeys.CURRENT_USER] })
@@ -32,7 +33,8 @@ export function useAuth() {
   })
 
   const registerMutation = useMutation({
-    mutationFn: (credentials: { email: string; password: string }) => authUseCase.register(credentials),
+    mutationFn: (credentials: { email: string; password: string }) =>
+      authUseCase.register(credentials),
     onSuccess: () => {
       toast({
         title: "Inscription réussie !",

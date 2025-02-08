@@ -39,28 +39,36 @@ export const queryResolvers = {
     return dbUser ? dbUserToUser(dbUser) : null
   },
   randomTracks: async function randomTracksResolver(
-    _: never, 
-    __: never, 
+    _: never,
+    __: never,
     context: Context
   ): Promise<Track[]> {
     checkAuth(context)
     try {
       const genres = [
-        "rock", "pop", "rap", "jazz", "classical", 
-        "electronic", "indie", "blues", "reggae", "metal"
+        "rock",
+        "pop",
+        "rap",
+        "jazz",
+        "classical",
+        "electronic",
+        "indie",
+        "blues",
+        "reggae",
+        "metal"
       ]
-      
+
       const randomGenre = genres[Math.floor(Math.random() * genres.length)]
-      
+
       const randomIndex = Math.floor(Math.random() * 500)
-      
+
       const response = await fetch(`${config.DEEZER_API_URI}/search?q=${encodeURIComponent(randomGenre)}&index=${randomIndex}&limit=21`)
 
       if (!response.ok) {
         throw new Error(`Erreur Deezer: ${response.status}`)
       }
 
-      const jsonData = await response.json() as DeezerResponse
+      const jsonData = (await response.json()) as DeezerResponse
 
       if (!jsonData.data || jsonData.data.length === 0) {
         return this.randomTracks(_, __, context)

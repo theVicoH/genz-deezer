@@ -41,9 +41,7 @@ describe("UserUseCase", () => {
     it("should throw error with invalid email", async () => {
       const invalidEmail = "invalid-email"
 
-      await expect(userUseCase.updateProfile(invalidEmail))
-        .rejects
-        .toThrow("Email invalide")
+      await expect(userUseCase.updateProfile(invalidEmail)).rejects.toThrow("Email invalide")
 
       expect(mockUserRepository.updateProfile).not.toHaveBeenCalled()
     })
@@ -51,12 +49,9 @@ describe("UserUseCase", () => {
     it("should throw error with empty email", async () => {
       const emptyEmail = ""
 
-      await expect(userUseCase.updateProfile(emptyEmail))
-        .rejects
-        .toThrow("Email invalide")
+      await expect(userUseCase.updateProfile(emptyEmail)).rejects.toThrow("Email invalide")
 
       expect(mockUserRepository.updateProfile).not.toHaveBeenCalled()
     })
   })
-
 })

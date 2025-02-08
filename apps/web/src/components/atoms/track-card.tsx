@@ -38,7 +38,7 @@ const TrackCard = ({ track, style, isActive, isLeft, isRight, onClick }: TrackCa
       animate={style}
       initial={style}
       transition={{ duration: 0.3 }}
-      style={{ 
+      style={{
         position: "absolute",
         top: "50%",
         x: `calc(-50% + ${style.x}px)`,
@@ -50,14 +50,12 @@ const TrackCard = ({ track, style, isActive, isLeft, isRight, onClick }: TrackCa
       className="group hover:cursor-pointer"
       onClick={onClick}
     >
-      <div 
+      <div
         className={`relative h-64 w-64 overflow-hidden rounded-lg shadow-xl transition-all duration-300 ${getRotationClass()} ${
           isActive ? "group-hover:scale-110" : "group-hover:scale-105"
         }`}
       >
-        {!imageLoaded && (
-          <Skeleton className="bg-muted absolute inset-0 h-full w-full" />
-        )}
+        {!imageLoaded && <Skeleton className="bg-muted absolute inset-0 h-full w-full" />}
         <img
           src={track.album.cover_medium}
           alt={track.title}

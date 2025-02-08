@@ -63,5 +63,4 @@ describe("AuthUseCase", () => {
       expect(mockAuthRepository.register).not.toHaveBeenCalled()
     })
   })
-
 })

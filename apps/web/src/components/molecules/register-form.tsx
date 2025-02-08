@@ -51,13 +51,25 @@ const RegisterForm = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Mot de passe</Label>
-          <Input type="password" id="password" placeholder="Enter your password" {...registerField("password")} />
+          <Input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            {...registerField("password")}
+          />
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-          <Input type="password" id="confirmPassword" placeholder="Confirm your password" {...registerField("confirmPassword")} />
-          {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
+          <Input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+            {...registerField("confirmPassword")}
+          />
+          {errors.confirmPassword && (
+            <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
+          )}
         </div>
         {error && (
           <Alert variant="destructive">

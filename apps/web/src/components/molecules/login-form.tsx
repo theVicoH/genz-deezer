@@ -45,7 +45,12 @@ const LoginForm = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Mot de passe</Label>
-          <Input type="password" id="password" placeholder="Enter your password" {...register("password")} />
+          <Input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            {...register("password")}
+          />
           {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
         </div>
         {error && (

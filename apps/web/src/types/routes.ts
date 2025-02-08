@@ -7,4 +7,3 @@ export enum PrivateRoutes {
   HOME = "/home",
   PROFILE = "/profile"
 }
-

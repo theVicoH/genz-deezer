@@ -16,4 +16,5 @@ const { url } = await startStandaloneServer(server, {
   context: getContext
 })
 
+// eslint-disable-next-line no-console
 console.log(`🚀 Server ready at: ${url}`)

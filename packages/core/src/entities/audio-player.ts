@@ -1,5 +1,5 @@
 export interface AudioPlayer {
   currentTime: number
-  isPlaying: boolean 
+  isPlaying: boolean
   duration: number
 }

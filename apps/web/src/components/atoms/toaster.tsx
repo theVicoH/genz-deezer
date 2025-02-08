@@ -1,4 +1,11 @@
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from "@/components/atoms/toast"
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport
+} from "@/components/atoms/toast"
 import { useToast } from "@/hooks/use-toast"
 
 export const Toaster = () => {

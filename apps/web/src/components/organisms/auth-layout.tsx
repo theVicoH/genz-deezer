@@ -3,7 +3,6 @@ import { Outlet, Navigate } from "react-router-dom"
 import DeezerLogo from "@/assets/icons/logo.svg"
 import { authTokenStateUseCase } from "@/lib/usecases"
 
-
 const AuthLayout = () => {
   const isAuthenticated = authTokenStateUseCase.isAuthenticated()
 

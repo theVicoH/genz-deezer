@@ -15,7 +15,10 @@ import { generateToken, checkAuth } from "@/utils/auth"
 import { dbUserToUser } from "@/utils/user"
 
 export const mutationResolvers = {
-  register: async (_: never, { email, password }: MutationRegisterArgs): Promise<RegisterReponse> => {
+  register: async (
+    _: never,
+    { email, password }: MutationRegisterArgs
+  ): Promise<RegisterReponse> => {
     try {
       const [existingUser] = await sql<DBUser[]>`
         SELECT id 
@@ -86,8 +89,8 @@ export const mutationResolvers = {
         WHERE id = ${userId}
         RETURNING id, email, created_at
       `
-      
-      return { 
+
+      return {
         success: true,
         user: dbUserToUser(dbUser)
       }
