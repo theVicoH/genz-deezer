@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useToast } from "@/hooks/use-toast"
 import { authTokenStateUseCase, authUseCase } from "@/lib/usecases"
+import { QueryKeys } from "@/types/query-keys"
 import { PrivateRoutes, PublicRoutes } from "@/types/routes"
 
 export function useAuth() {
@@ -14,7 +15,7 @@ export function useAuth() {
     mutationFn: (credentials: { email: string; password: string }) => authUseCase.login(credentials),
     onSuccess: (data) => {
       authTokenStateUseCase.setToken(data.token)
-      queryClient.invalidateQueries({ queryKey: ["currentUser"] })
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.CURRENT_USER] })
       toast({
         title: "Connexion réussie !",
         description: "Vous êtes maintenant connecté."

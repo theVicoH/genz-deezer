@@ -10,13 +10,14 @@ import TrackCard from "@/components/atoms/track-card"
 import AudioPlayerControls from "@/components/molecules/audio-player-controls"
 import { useAudioPlayer } from "@/hooks/use-audio-player"
 import { tracksUseCase } from "@/lib/usecases"
+import { QueryKeys } from "@/types/query-keys"
 import { getCardStyles, getVisibleIndexes } from "@/utils/tracks-visibility"
 
 const DeezerAudioPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
 
   const { data, isLoading } = useQuery({
-    queryKey: ["randomTracks"],
+    queryKey: [QueryKeys.RANDOM_TRACKS],
     queryFn: () => tracksUseCase.randomTracks()
   })
 
