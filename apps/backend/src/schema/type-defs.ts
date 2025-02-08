@@ -10,8 +10,13 @@ export const typeDefs = `#graphql
     user: User!
   }
 
-  type RegisterReponse {
+  type RegisterResponse {
     success: Boolean!
+  }
+
+  type UpdateProfileResponse {
+    success: Boolean!
+    user: User
   }
 
   type Track {
@@ -36,7 +41,6 @@ export const typeDefs = `#graphql
     cover_medium: String
   }
 
-
   type Query {
     me: User!
     users: [User!]!
@@ -45,9 +49,9 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    register(email: String!, password: String!): RegisterReponse!
+    register(email: String!, password: String!): RegisterResponse!
     login(email: String!, password: String!): LoginResponse!
-    updateProfile(email: String!): User!
+    updateProfile(email: String!): UpdateProfileResponse!
     deleteAccount: Boolean!
     getCurrentUser: User
   }

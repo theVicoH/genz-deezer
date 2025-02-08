@@ -67,26 +67,33 @@ export const mutationResolvers = {
   },
 
   updateProfile: async (_: never, { email }: MutationUpdateProfileArgs, context: Context) => {
-    const userId = checkAuth(context)
+    try {
+      const userId = checkAuth(context)
 
-    const [existingUser] = await sql<DBUser[]>`
-      SELECT id 
-      FROM users 
-      WHERE email = ${email} AND id != ${userId}
-    `
+      const [existingUser] = await sql<DBUser[]>`
+        SELECT id 
+        FROM users 
+        WHERE email = ${email} AND id != ${userId}
+      `
 
-    if (existingUser) {
-      throw new Error("Cet email est déjà utilisé")
+      if (existingUser) {
+        throw new Error("Cet email est déjà utilisé")
+      }
+
+      const [dbUser] = await sql<DBUser[]>`
+        UPDATE users
+        SET email = ${email}
+        WHERE id = ${userId}
+        RETURNING id, email, created_at
+      `
+
+      return { 
+        success: true,
+        user: dbUserToUser(dbUser)
+      }
+    } catch {
+      return { success: false }
     }
-
-    const [dbUser] = await sql<DBUser[]>`
-      UPDATE users
-      SET email = ${email}
-      WHERE id = ${userId}
-      RETURNING id, email, created_at
-    `
-
-    return dbUserToUser(dbUser)
   },
 
   deleteAccount: async (_: never, __: never, context: Context): Promise<boolean> => {
