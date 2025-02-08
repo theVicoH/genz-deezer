@@ -9,7 +9,6 @@ export const sql = postgres({
   username: config.DB_USER,
   password: config.DB_PASSWORD,
   debug: true,
-  timeout: 10,
   max: 10,
   idle_timeout: 20,
   connect_timeout: 10
