@@ -9,6 +9,7 @@ import { Input } from "../atoms/input"
 import { Label } from "../atoms/label"
 
 import { useAuth } from "@/hooks/use-auth"
+import { PublicRoutes } from "@/types/routes"
 
 const registerSchema = z
   .object({
@@ -70,7 +71,7 @@ const RegisterForm = () => {
       <div className="text-center">
         <span className="text-sm text-gray-500">
           Déjà un compte ?{" "}
-          <Button variant="link" className="p-0" onClick={() => navigate("/login")}>
+          <Button variant="link" className="p-0" onClick={() => navigate(PublicRoutes.LOGIN)}>
             Se connecter
           </Button>
         </span>

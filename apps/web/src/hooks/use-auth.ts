@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useToast } from "@/hooks/use-toast"
 import { authTokenStateUseCase, authUseCase } from "@/lib/usecases"
+import { PrivateRoutes, PublicRoutes } from "@/types/routes"
 
 export function useAuth() {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ export function useAuth() {
         title: "Connexion réussie !",
         description: "Vous êtes maintenant connecté."
       })
-      navigate("/dashboard")
+      navigate(PrivateRoutes.HOME)
     },
     onError: (error: Error) => {
       toast({
@@ -36,7 +37,7 @@ export function useAuth() {
         title: "Inscription réussie !",
         description: "Vous pouvez maintenant vous connecter."
       })
-      navigate("/login")
+      navigate(PublicRoutes.LOGIN)
     },
     onError: (error: Error) => {
       toast({

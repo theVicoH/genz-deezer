@@ -15,6 +15,7 @@ import {
 import { useCurrentUser } from "@/hooks/use-current-user"
 import { client } from "@/lib/repositories"
 import { authTokenStateUseCase } from "@/lib/usecases"
+import { PrivateRoutes, PublicRoutes } from "@/types/routes"
 
 const UserNav = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const UserNav = () => {
     queryClient.clear()
     client.clearStore()
 
-    navigate("/login")
+    navigate(PublicRoutes.LOGIN)
   }
 
   const initials = user?.email.split("@")[0].slice(0, 2).toUpperCase() ?? "??"
@@ -47,8 +48,8 @@ const UserNav = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate("/dashboard")}>Tableau de bord</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => navigate("/profile")}>Profil</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate(PrivateRoutes.HOME)}>Home</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate(PrivateRoutes.PROFILE)}>Profil</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>Se déconnecter</DropdownMenuItem>
       </DropdownMenuContent>
