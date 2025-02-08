@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 
 import { Avatar, AvatarFallback } from "../atoms/avatar"
@@ -12,14 +13,19 @@ import {
 } from "../atoms/dropdown-menu"
 
 import { useCurrentUser } from "@/hooks/use-current-user"
+import { client } from "@/lib/repositories"
 import { authTokenStateUseCase } from "@/lib/usecases"
 
 const UserNav = () => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { data: user } = useCurrentUser()
 
   const handleLogout = () => {
     authTokenStateUseCase.clearToken()
+    queryClient.clear()
+    client.clearStore()
+
     navigate("/login")
   }
 
