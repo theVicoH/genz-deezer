@@ -4,9 +4,10 @@ import type { AudioPlayer } from "../../entities/audio-player"
 export class AudioPlayerUseCase {
   constructor(private playerRepository: AudioPlayerRepository) {}
 
-  async play(trackUrl: string): Promise<void> {
-    await this.playerRepository.play(trackUrl)
+  async play(trackUrl: string, startTime?: number): Promise<void> {
+    await this.playerRepository.play(trackUrl, startTime)
   }
+  
 
   pause(): void {
     this.playerRepository.pause()

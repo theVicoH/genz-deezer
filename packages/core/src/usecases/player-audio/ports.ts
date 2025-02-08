@@ -1,5 +1,5 @@
 export interface AudioPlayerRepository {
-  play(trackUrl: string): Promise<void>
+  play(trackUrl: string, startTime?: number): Promise<void>
   pause(): void
   seek(time: number): void
   getCurrentTime(): number

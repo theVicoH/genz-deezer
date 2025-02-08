@@ -11,9 +11,14 @@ export class HTML5AudioPlayerRepository implements AudioPlayerRepository {
     })
   }
 
-  async play(trackUrl: string): Promise<void> {
+  async play(trackUrl: string, startTime?: number): Promise<void> {
     try {
-      this.audio.src = trackUrl
+      if (this.audio.src !== trackUrl) {
+        this.audio.src = trackUrl
+      }
+      if (startTime !== undefined) {
+        this.audio.currentTime = startTime
+      }
       await this.audio.play()
     } catch (error) {
       console.error("Play error:", error)

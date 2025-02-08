@@ -45,22 +45,20 @@ export const useAudioPlayer = (onTrackEnd: () => void) => {
 
     return () => {
       clearInterval(intervalId)
+      audioPlayerUseCase.pause()
+      setIsPlaying(false)
     }
   }, [onTrackEnd])
 
   const handlePlayPause = async () => {
     if (!currentTrackUrl) return
-
+  
     if (isPlaying) {
       audioPlayerUseCase.pause()
       setIsPlaying(false)
     } else {
-      if (currentTime >= PREVIEW_DURATION_LIMIT) {
-        await loadAudio(currentTrackUrl)
-      } else {
-        await audioPlayerUseCase.play(currentTrackUrl)
-        setIsPlaying(true)
-      }
+      await audioPlayerUseCase.play(currentTrackUrl, currentTime)
+      setIsPlaying(true)
     }
   }
 
