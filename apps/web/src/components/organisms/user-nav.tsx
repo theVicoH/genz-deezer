@@ -48,8 +48,18 @@ const UserNav = () => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => navigate(PrivateRoutes.HOME)}>Home</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => navigate(PrivateRoutes.PROFILE)}>Profil</DropdownMenuItem>
+        <DropdownMenuItem 
+          disabled={location.pathname === PrivateRoutes.HOME}
+          onClick={() => navigate(PrivateRoutes.HOME)}
+        >
+          Home
+        </DropdownMenuItem>
+        <DropdownMenuItem 
+          disabled={location.pathname === PrivateRoutes.PROFILE}
+          onClick={() => navigate(PrivateRoutes.PROFILE)}
+        >
+          Profil
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>Se déconnecter</DropdownMenuItem>
       </DropdownMenuContent>

@@ -42,6 +42,19 @@ export class ApolloUserRepository implements UserRepository {
         headers: {
           Authorization: `Bearer ${token}`
         }
+      },
+      update: (cache, { data }) => {
+        if (data?.updateProfile.success) {
+          cache.writeQuery({
+            query: GET_ME,
+            data: {
+              me: {
+                email: email,
+                __typename: "User"
+              }
+            }
+          })
+        }
       }
     })
 
