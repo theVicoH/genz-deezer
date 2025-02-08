@@ -7,14 +7,16 @@ interface AuthTokenState {
   token: string | null
 }
 
-const useAuthTokenStore = create<AuthTokenState>()(persist(
-  () => ({
-    token: null as string | null
-  }),
-  {
-    name: "auth-token-storage"
-  }
-))
+const useAuthTokenStore = create<AuthTokenState>()(
+  persist(
+    () => ({
+      token: null as string | null
+    }),
+    {
+      name: "auth-token-storage"
+    }
+  )
+)
 
 export class ZustandAuthTokenStateRepository implements AuthTokenStateRepository {
   getToken(): string | null {

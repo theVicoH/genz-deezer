@@ -31,8 +31,8 @@ const DeezerAudioPlayer = () => {
     setCurrentTrackIndex((prev) => (prev === 0 ? data.randomTracks.length - 1 : prev - 1))
   }, [data?.randomTracks])
 
-  const { currentTime, isPlaying, previewDuration, loadAudio, handlePlayPause, handleSeek }
-    = useAudioPlayer(handleNext)
+  const { currentTime, isPlaying, previewDuration, loadAudio, handlePlayPause, handleSeek } =
+    useAudioPlayer(handleNext)
 
   useEffect(() => {
     if (!data?.randomTracks) return
@@ -44,8 +44,7 @@ const DeezerAudioPlayer = () => {
       <div className="flex h-screen items-center justify-center">
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-        >
+          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}>
           <Logo />
         </motion.div>
       </div>

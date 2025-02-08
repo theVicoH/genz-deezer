@@ -48,13 +48,11 @@ const TrackCard = ({ track, style, isActive, isLeft, isRight, onClick }: TrackCa
         zIndex: style.zIndex
       }}
       className="group hover:cursor-pointer"
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <div
         className={`relative h-64 w-64 overflow-hidden rounded-lg shadow-xl transition-all duration-300 ${getRotationClass()} ${
           isActive ? "group-hover:scale-110" : "group-hover:scale-105"
-        }`}
-      >
+        }`}>
         {!imageLoaded && <Skeleton className="bg-muted absolute inset-0 h-full w-full" />}
         <img
           src={track.album.cover_medium}
