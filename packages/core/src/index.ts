@@ -30,6 +30,6 @@ export * from "./usecases/musics/tracks.usecase"
 
 // Player Audio UseCases
 
-export * from "./usecases/audio-player/ports"
+export * from "./usecases/player-audio/ports"
 
-export * from "./usecases/audio-player/audio-player.usecase"
+export * from "./usecases/player-audio/audio-player.usecase"

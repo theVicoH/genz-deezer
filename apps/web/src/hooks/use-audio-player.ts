@@ -1,37 +1,23 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useEffect } from "react"
 
-const MAX_PREVIEW_DURATION = 8
+import { audioPlayerUseCase } from "@/lib/usecases"
+
+const PREVIEW_DURATION_LIMIT = 8
 
 export const useAudioPlayer = (onTrackEnd: () => void) => {
   const [currentTime, setCurrentTime] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [previewDuration, setPreviewDuration] = useState(0)
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const timeUpdateIntervalRef = useRef<number>()
-  const previewTimeoutRef = useRef<number>()
+  const [, setPreviewDuration] = useState(0)
+  const [currentTrackUrl, setCurrentTrackUrl] = useState<string | null>(null)
 
-  const loadAudio = async () => {
-    if (!audioRef.current) return
-  
-    const audio = audioRef.current
-    
-    audio.currentTime = 0
-    setCurrentTime(0)
-    setIsPlaying(false)
-  
-    await new Promise((resolve) => {
-      audio.load()
-      audio.addEventListener("loadedmetadata", () => {
-        const actualDuration = Math.min(audio.duration, MAX_PREVIEW_DURATION)
-
-        setPreviewDuration(actualDuration)
-        resolve(null)
-      }, { once: true })
-    })
-  
+  const loadAudio = async (trackUrl: string) => {
     try {
-      await audio.play()
+      setCurrentTrackUrl(trackUrl)
+      await audioPlayerUseCase.play(trackUrl)
       setIsPlaying(true)
+
+      setPreviewDuration(PREVIEW_DURATION_LIMIT)
+      setCurrentTime(0)
     } catch (error) {
       console.error("Erreur de lecture:", error)
       setIsPlaying(false)
@@ -39,48 +25,59 @@ export const useAudioPlayer = (onTrackEnd: () => void) => {
   }
 
   useEffect(() => {
-    const audio = audioRef.current
+    audioPlayerUseCase.onTrackEnd(onTrackEnd)
 
-    if (!audio) return
+    const intervalId = setInterval(() => {
+      const state = audioPlayerUseCase.getCurrentState()
+      const newTime = state.currentTime
 
-    if (isPlaying) {
-      if (previewTimeoutRef.current) clearTimeout(previewTimeoutRef.current)
-      previewTimeoutRef.current = window.setTimeout(onTrackEnd, previewDuration * 1000)
-
-      audio.play().catch(error => {
-        console.error("Erreur de lecture:", error)
+      if (newTime >= PREVIEW_DURATION_LIMIT) {
+        audioPlayerUseCase.pause()
         setIsPlaying(false)
-      })
+        onTrackEnd()
 
-      timeUpdateIntervalRef.current = window.setInterval(() => {
-        if (audio.currentTime >= previewDuration) {
-          audio.pause()
-          audio.currentTime = 0
-          setCurrentTime(0)
-          onTrackEnd()
+        return
+      }
 
-          return
-        }
-        setCurrentTime(audio.currentTime)
-      }, 50)
-    } else {
-      audio.pause()
-      if (timeUpdateIntervalRef.current) clearInterval(timeUpdateIntervalRef.current)
-    }
+      setCurrentTime(newTime)
+      setIsPlaying(state.isPlaying)
+    }, 50)
 
     return () => {
-      if (timeUpdateIntervalRef.current) clearInterval(timeUpdateIntervalRef.current)
-      if (previewTimeoutRef.current) clearTimeout(previewTimeoutRef.current)
+      clearInterval(intervalId)
     }
-  }, [isPlaying, onTrackEnd, previewDuration])
+  }, [onTrackEnd])
+
+  const handlePlayPause = async () => {
+    if (!currentTrackUrl) return
+
+    if (isPlaying) {
+      audioPlayerUseCase.pause()
+      setIsPlaying(false)
+    } else {
+      if (currentTime >= PREVIEW_DURATION_LIMIT) {
+        await loadAudio(currentTrackUrl)
+      } else {
+        await audioPlayerUseCase.play(currentTrackUrl)
+        setIsPlaying(true)
+      }
+    }
+  }
+
+  const handleSeek = (time: number) => {
+    const clampedTime = Math.min(time, PREVIEW_DURATION_LIMIT)
+
+    audioPlayerUseCase.seek(clampedTime)
+    setCurrentTime(clampedTime)
+  }
 
   return {
-    audioRef,
     currentTime,
     isPlaying,
     setIsPlaying,
-    previewDuration,
+    previewDuration: PREVIEW_DURATION_LIMIT,
     loadAudio,
-    setCurrentTime
+    handlePlayPause,
+    handleSeek
   }
 }

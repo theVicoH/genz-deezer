@@ -3,17 +3,18 @@ import { useCallback, useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { motion } from "motion/react"
 
+import AudioProgressBar from "../molecules/audio-progress-bar"
+
 import Logo from "@/assets/icons/logo.svg"
 import TrackCard from "@/components/atoms/track-card"
-import PlayerControls from "@/components/molecules/player-controls"
-import ProgressBar from "@/components/molecules/progress-bar"
+import AudioPlayerControls from "@/components/molecules/audio-player-controls"
 import { useAudioPlayer } from "@/hooks/use-audio-player"
 import { tracksUseCase } from "@/lib/usecases"
 import { getCardStyles, getVisibleIndexes } from "@/utils/tracks-visibility"
 
-const DeezerPlayer = () => {
+const DeezerAudioPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
-  
+
   const { data, isLoading } = useQuery({
     queryKey: ["randomTracks"],
     queryFn: () => tracksUseCase.randomTracks()
@@ -21,30 +22,20 @@ const DeezerPlayer = () => {
 
   const handleNext = useCallback(() => {
     if (!data?.randomTracks) return
-    setCurrentTrackIndex(prev => (prev + 1) % data.randomTracks.length)
-    setIsPlaying(true)
+    setCurrentTrackIndex((prev) => (prev + 1) % data.randomTracks.length)
   }, [data?.randomTracks])
 
   const handlePrevious = useCallback(() => {
     if (!data?.randomTracks) return
-    setCurrentTrackIndex(prev => 
-      prev === 0 ? data.randomTracks.length - 1 : prev - 1)
-    setIsPlaying(true)
+    setCurrentTrackIndex((prev) => (prev === 0 ? data.randomTracks.length - 1 : prev - 1))
   }, [data?.randomTracks])
 
-  const {
-    audioRef,
-    currentTime,
-    isPlaying,
-    setIsPlaying,
-    previewDuration,
-    loadAudio,
-    setCurrentTime
-  } = useAudioPlayer(handleNext)
+  const { currentTime, isPlaying, previewDuration, loadAudio, handlePlayPause, handleSeek }
+    = useAudioPlayer(handleNext)
 
   useEffect(() => {
     if (!data?.randomTracks) return
-    loadAudio()
+    loadAudio(data.randomTracks[currentTrackIndex].preview)
   }, [currentTrackIndex, data?.randomTracks])
 
   if (isLoading || !data) {
@@ -64,12 +55,15 @@ const DeezerPlayer = () => {
   const visibleIndexes = getVisibleIndexes(currentTrackIndex, data.randomTracks.length)
 
   const handleProgressChange = (values: number[]) => {
-    if (audioRef.current && values.length > 0) {
+    if (values.length > 0) {
       const newTime = Math.min(values[0], previewDuration)
 
-      audioRef.current.currentTime = newTime
-      setCurrentTime(newTime)
+      handleSeek(newTime)
     }
+  }
+
+  const handleCardClick = (index: number) => {
+    setCurrentTrackIndex(index)
   }
 
   return (
@@ -82,14 +76,10 @@ const DeezerPlayer = () => {
               track={data.randomTracks[index]}
               style={getCardStyles(index, currentTrackIndex, data.randomTracks.length)}
               isActive={index === currentTrackIndex}
-              onClick={() => {
-                setCurrentTrackIndex(index)
-                setIsPlaying(true)
-              }}
+              onClick={() => handleCardClick(index)}
               isLeft={getCardStyles(index, currentTrackIndex, data.randomTracks.length).isLeft}
               isRight={getCardStyles(index, currentTrackIndex, data.randomTracks.length).isRight}
             />
-          
           ))}
         </div>
 
@@ -101,19 +91,18 @@ const DeezerPlayer = () => {
         <div className="bg-background fixed bottom-0 left-0 right-0 pb-10 pt-2">
           <div className="mx-auto flex max-w-3xl flex-col items-center px-4">
             <div className="flex w-full flex-col items-center gap-y-1">
-              <PlayerControls
+              <AudioPlayerControls
                 isPlaying={isPlaying}
-                onPlayPause={() => setIsPlaying(!isPlaying)}
+                onPlayPause={handlePlayPause}
                 onPrevious={handlePrevious}
                 onNext={handleNext}
               />
-              <ProgressBar
+              <AudioProgressBar
                 currentTime={currentTime}
                 duration={previewDuration}
                 onProgressChange={handleProgressChange}
               />
             </div>
-            <audio ref={audioRef} src={currentTrack.preview} preload="metadata" />
           </div>
         </div>
       </div>
@@ -121,4 +110,4 @@ const DeezerPlayer = () => {
   )
 }
 
-export default DeezerPlayer
+export default DeezerAudioPlayer

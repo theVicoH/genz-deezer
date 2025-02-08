@@ -1,6 +1,12 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
-import { ApolloAuthRepository, ApolloUserRepository, ApolloTracksRepository, ZustandAuthTokenStateRepository, HTML5AudioPlayerRepository } from "@genz-deezer/infrastructure"
+import {
+  ApolloAuthRepository,
+  ApolloUserRepository,
+  ApolloTracksRepository,
+  ZustandAuthTokenStateRepository,
+  HTML5AudioPlayerRepository
+} from "@genz-deezer/infrastructure"
 
 import { authTokenStateUseCase } from "@/lib/usecases"
 
@@ -32,14 +38,14 @@ export const authTokenStateRepository = new ZustandAuthTokenStateRepository()
 
 // HTML5 Player audio Repositories
 
-export const html5PlayerAudioRepository = new HTML5AudioPlayerRepository()
+export const html5AudioPlayerRepository = new HTML5AudioPlayerRepository()
 
 // User Repositories
 
-export const userRepository = new ApolloUserRepository(client, () => authTokenStateUseCase.getToken())
+export const userRepository = new ApolloUserRepository(client, () =>
+  authTokenStateUseCase.getToken())
 
 // Track Repositories
 
-export const tracksRepository = new ApolloTracksRepository(client, () => authTokenStateUseCase.getToken())
-
-
+export const tracksRepository = new ApolloTracksRepository(client, () =>
+  authTokenStateUseCase.getToken())

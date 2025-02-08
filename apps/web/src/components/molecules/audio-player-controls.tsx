@@ -9,7 +9,12 @@ type PlayerControlsProps = {
   onNext: () => void
 }
 
-const PlayerControls = ({ isPlaying, onPlayPause, onPrevious, onNext }: PlayerControlsProps) => (
+const AudioPlayerControls = ({
+  isPlaying,
+  onPlayPause,
+  onPrevious,
+  onNext
+}: PlayerControlsProps) => (
   <div className="flex items-center space-x-3">
     <Button size="icon" variant="ghost" onClick={onPrevious}>
       <SkipBack className="h-6 w-6" />
@@ -27,4 +32,4 @@ const PlayerControls = ({ isPlaying, onPlayPause, onPrevious, onNext }: PlayerCo
   </div>
 )
 
-export default PlayerControls
+export default AudioPlayerControls
