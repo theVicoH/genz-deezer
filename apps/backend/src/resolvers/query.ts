@@ -52,9 +52,9 @@ export const queryResolvers = {
       
       const randomGenre = genres[Math.floor(Math.random() * genres.length)]
       
-      const randomIndex = Math.floor(Math.random() * 900)
+      const randomIndex = Math.floor(Math.random() * 500)
       
-      const response = await fetch(`${config.DEEZER_API_URI}/search?q=genre:"${randomGenre}"&index=${randomIndex}&limit=21`)
+      const response = await fetch(`${config.DEEZER_API_URI}/search?q=${encodeURIComponent(randomGenre)}&index=${randomIndex}&limit=21`)
 
       if (!response.ok) {
         throw new Error(`Erreur Deezer: ${response.status}`)
